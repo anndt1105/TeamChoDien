@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="9509" started-at="2018-10-14T08:45:44Z" finished-at="2018-10-14T08:45:54Z">
+    <groups>
+    </groups>
+    <test name="Test01" duration-ms="9509" started-at="2018-10-14T08:45:44Z" finished-at="2018-10-14T08:45:54Z">
+      <class name="wsm.teamChoDien.Test.LoginTest">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:wsm.teamChoDien.Test.LoginTest@d2cc05a]" name="beforeTest" is-config="true" duration-ms="7425" started-at="2018-10-14T15:45:44Z" finished-at="2018-10-14T15:45:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="b_loginWithValidAcount()[pri:0, instance:wsm.teamChoDien.Test.LoginTest@d2cc05a]" name="b_loginWithValidAcount" duration-ms="1288" started-at="2018-10-14T15:45:52Z" finished-at="2018-10-14T15:45:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- b_loginWithValidAcount -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:wsm.teamChoDien.Test.LoginTest@d2cc05a]" name="afterTest" is-config="true" duration-ms="780" started-at="2018-10-14T15:45:53Z" finished-at="2018-10-14T15:45:54Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- wsm.teamChoDien.Test.LoginTest -->
+    </test> <!-- Test01 -->
+  </suite> <!-- Suite -->
+</testng-results>
