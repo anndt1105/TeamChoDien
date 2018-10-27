@@ -7,6 +7,15 @@ import org.openqa.selenium.WebElement;
 public class DashboardPageObject {
 	private static WebElement element = null;
 	
+	public static WebElement popup_CloseDayOff(WebDriver driver) {
+		element = driver.findElement(By.xpath("//*[@id=\"register-modal\"]/div/div/div[1]/button/i"));
+		return element;
+	}
+	//Find flash message login successfully
+	public static WebElement mess_loginSuccess(WebDriver driver) {
+		element = driver.findElement(By.xpath("//*[@id=\"flash-message\"]"));
+		return element;
+	}	
 	//Find Element of Personal Request 
 	//Find button Personal request
 	public static WebElement btn_personalRequest(WebDriver driver) {
