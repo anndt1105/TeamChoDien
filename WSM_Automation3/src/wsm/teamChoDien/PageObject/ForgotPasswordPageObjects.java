@@ -16,7 +16,7 @@ public class ForgotPasswordPageObjects {
 
 	// Finding element UI of user name field
 	public static WebElement txt_UserEmail(WebDriver driver) {
-		element = driver.findElement(By.name("user[email]"));
+		element = driver.findElement(By.xpath("(//input[@id='user_email'])[2]"));
 		return element;
 	}
 
@@ -55,10 +55,17 @@ public class ForgotPasswordPageObjects {
 		element = driver.findElement(By.xpath("//*[@id='devise-forgot-password-form']/div[1]/p"));
 		return element;
 	}
-	
+
 	// Finding element UI of Message sensd mail succesfull
 	public static WebElement msg_MessageSendSuccessfull(WebDriver driver) {
-		element = driver.findElement(By.xpath("/html/body/div[2]/div[2]/section/div/p/text()"));
+		element = driver.findElement(By.xpath(
+				"//p[contains(text(),'You will receive an email with instructions on how to reset your password in a few minutes')]"));
+		return element;
+	}
+
+	// Finding element UI of Message sensd mail succesfull
+	public static WebElement msg_emailNotFound(WebDriver driver) {
+		element = driver.findElement(By.xpath("//p[contains(text(),'Email not found')]"));
 		return element;
 	}
 }

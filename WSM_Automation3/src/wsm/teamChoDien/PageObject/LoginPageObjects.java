@@ -56,5 +56,11 @@ public class LoginPageObjects {
 		return element;
 	}
 	
+	// Finding element UI of forgot password link
+		public static WebElement link_ForgotPass(WebDriver driver) {
+			element = driver.findElement(By.xpath("//a[@class='btn-forgot-password']"));
+			return element;
+		}
+	
 
 }
