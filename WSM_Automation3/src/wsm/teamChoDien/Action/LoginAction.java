@@ -13,6 +13,7 @@ public static void login(WebDriver driver,String email, String password) throws 
 		
 		// Input data into password field
 		LoginPageObjects.txt_Password(driver).sendKeys(password);
+		Thread.sleep(100);
 		
 		//WebDriverWait wait = new WebDriverWait(driver, 20); 
 		//wait.until(ExpectedCondition.(LoginPageObjects.btn_Login(driver)));
