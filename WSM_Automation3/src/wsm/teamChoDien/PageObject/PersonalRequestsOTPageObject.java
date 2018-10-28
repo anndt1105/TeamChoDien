@@ -82,9 +82,36 @@ public class PersonalRequestsOTPageObject {
 		return element;
 	}
 	
+	//FIND MESSAGE REQUEST OT
 	//Find message create OT unsuccessfully
 	public static WebElement mess_requestOTUnsuccessfully(WebDriver driver) {
 		element = driver.findElement(By.className("text-danger"));
 		return element;
 	}
+	
+	//Find message validate create OT when project field is blank
+	public static WebElement mess_projectBlank(WebDriver driver) {
+		element = driver.findElement(By.id("request_ot_project_name-error"));
+		return element;
+	}
+	
+	//Find message validate create OT when FROM DATE field is blank
+	public static WebElement mess_fromDATEBlank(WebDriver driver) {
+		element = driver.findElement(By.id("request_ot_from_time-error"));
+		return element;
+	}
+	
+	//Find message validate create OT when TO DATE field is blank
+	public static WebElement mess_toDATEBlank(WebDriver driver) {
+		element = driver.findElement(By.id("request_ot_end_time-error"));
+		return element;
+	}
+	
+	//Find message validate create OT when REASON field is blank
+	public static WebElement mess_reasonBlank(WebDriver driver) {
+		element = driver.findElement(By.id("request_ot_reason-error"));
+		return element;
+	}
+	
+	
 }
