@@ -1,4 +1,9 @@
 package wsm.teamChoDien.Test;
+
+import org.apache.commons.logging.Log;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -6,80 +11,123 @@ import wsm.teamChoDien.Action.ClosePopupDayOffAction;
 import wsm.teamChoDien.Action.LoginAction;
 import wsm.teamChoDien.Action.TransitionPageAction;
 import wsm.teamChoDien.PageObject.DashboardPageObject;
+import wsm.teamChoDien.PageObject.LoginPageObjects;
 import wsm.teamChoDien.Utility.ConstantVariable;
 
 public class LoginTest extends CommonTest {
-		// LOGIN_006
-		@Test
-		public void mess_loginWithValidAcount() throws Exception {
+	// LOGIN_006
+	@Test
+	public void mess_loginWithValidAcount() throws Exception {
 
-			// Go to Login Page
-			TransitionPageAction.gotoLoginPage(driver);
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
 
-			// Doing Login action with valid User name and password
-			LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
-			// Close popup Day off
-			ClosePopupDayOffAction.closePopup(driver);
-			
-			//Get message
-			String[] message=DashboardPageObject.mess_loginSuccess(driver).getText().split("\n");
-			
-			// Verify Result message successfully
-			Assert.assertEquals(message[message.length-1], ConstantVariable.LOGIN_SUCCESSFULY_MESSAGE);
-		}
-		// LOGIN_007
-		@Test
-		public void title_loginWithValidAcount() throws Exception {
+		// Close popup Day off
+		ClosePopupDayOffAction.closePopup(driver);
 
-			// Go to Login Page
-			TransitionPageAction.gotoLoginPage(driver);
+		// Get message
+		String[] message = DashboardPageObject.mess_loginSuccess(driver).getText().split("\n");
 
-			// Doing Login action with valid User name and password
-			LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
-			
-			Thread.sleep(1000);
-			// Verify title of Tab
-			Assert.assertEquals(driver.getTitle(),ConstantVariable.TAB_TITLE);
-			
-		}
-		//TC LOGIN_008
-		@Test
-		public void back_loginWithValidAcount() throws Exception {
+		// Verify Result message successfully
+		Assert.assertEquals(message[message.length - 1], ConstantVariable.LOGIN_SUCCESSFULY_MESSAGE);
+	}
 
-			// Go to Login Page
-			TransitionPageAction.gotoLoginPage(driver);
+	// LOGIN_007
+	@Test
+	public void title_loginWithValidAcount() throws Exception {
 
-			// Step 1+2: Doing Login action with valid User name and password
-			LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
 
-			Thread.sleep(1000);
-			//Step 3: Click Back on browser
-			driver.navigate().back();
-			Thread.sleep(1000);
-			
-			// Verify Result message successfully
-			Assert.assertEquals(driver.getTitle(),ConstantVariable.TAB_TITLE);
-			
-		}
-		//TC LOGIN_009
-		@Test
-		public void newTab_loginWithValidAcount() throws Exception {
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
-			// Go to Login Page
-			TransitionPageAction.gotoLoginPage(driver);
+		Thread.sleep(1000);
+		// Verify title of Tab
+		Assert.assertEquals(driver.getTitle(), ConstantVariable.TAB_TITLE);
 
-			// Step 1+2: Doing Login action with valid User name and password
-			LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);		
-			Thread.sleep(1000);
-			
-			//Step 3+4+5:
-		    driver.navigate().to("https://www.google.com/");
-		    driver.navigate().to(ConstantVariable.URL);
-		    
-		    // Verify Result message successfully
-			Assert.assertEquals(driver.getTitle(),ConstantVariable.TAB_TITLE);
-			
-		}
+	}
 
+	// TC LOGIN_008
+	@Test
+	public void back_loginWithValidAcount() throws Exception {
+
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		// Step 1+2: Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+		Thread.sleep(1000);
+		// Step 3: Click Back on browser
+		driver.navigate().back();
+		Thread.sleep(1000);
+
+		// Verify Result message successfully
+		Assert.assertEquals(driver.getTitle(), ConstantVariable.TAB_TITLE);
+
+	}
+
+	// TC LOGIN_009
+	@Test
+	public void newTab_loginWithValidAcount() throws Exception {
+
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		// Step 1+2: Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+		Thread.sleep(1000);
+
+		// Step 3+4+5:
+		driver.navigate().to("https://www.google.com/");
+		driver.navigate().to(ConstantVariable.URL);
+
+		// Verify Result message successfully
+		Assert.assertEquals(driver.getTitle(), ConstantVariable.TAB_TITLE);
+
+	}
+
+	// LOGIN_001 ~ 003
+	@Test
+	public void checkComponents() throws Exception {
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(LoginPageObjects.txt_title(driver)));
+
+		// F001 check Title
+		String title = LoginPageObjects.txt_title(driver).getText();
+		Assert.assertEquals(title, "LOGIN");
+
+		// F001 check Email textbox
+		Assert.assertTrue(LoginPageObjects.txt_UserEmail(driver).isDisplayed(), "Email textbox failed");
+		LoginPageObjects.txt_UserEmail(driver).sendKeys("123");
+
+		// F001 check Pass textbox
+		Assert.assertTrue(LoginPageObjects.txt_Password(driver).isDisplayed(), "Pass textbox Failed");
+
+		// F001 check Remember checkbox
+		Assert.assertTrue(LoginPageObjects.txt_RememberLogin(driver).isDisplayed(), "Remember checkbox Failed");
+
+		// F001 check OK button
+		Assert.assertTrue(LoginPageObjects.btn_Login(driver).isDisplayed(), "OK button failed");
+
+		// F001 check Cancel button
+		Assert.assertTrue(LoginPageObjects.btn_Cancel(driver).isDisplayed(), "Cancel button failed");
+
+		// F001 check Forgot pass link
+		Assert.assertTrue(LoginPageObjects.link_ForgotPass(driver).isDisplayed(), "Forgot pass link failed");
+
+		// F002 check initial value of remember checkbox
+		Assert.assertFalse(LoginPageObjects.txt_RememberLogin(driver).isSelected(), "Initial remember checkbox failed");
+
+		// F003 check pass encrypted
+		String type = LoginPageObjects.txt_Password(driver).getAttribute("type");
+		Assert.assertEquals(type, "password", "password encrypted Failed");
+	}
 }
