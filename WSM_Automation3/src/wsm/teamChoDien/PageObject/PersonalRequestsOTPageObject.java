@@ -15,7 +15,7 @@ public class PersonalRequestsOTPageObject {
 	
 	//Find button Create Request Overtime 
 	public static WebElement btn_createRequest(WebDriver driver) {
-		element = driver.findElement(By.xpath("//*[@id=\"main-container\"]/div[2]/div[3]/a"));
+		element = driver.findElement(By.xpath("//*[@id=\"main-container\"]/div[2]/div[2]/a"));
 		return element;
 	}
 	
@@ -37,19 +37,25 @@ public class PersonalRequestsOTPageObject {
 	}
 	//Find field branch
 	public static WebElement txb_branch(WebDriver driver) {
-		element = driver.findElement(By.id("select2-chosen-1"));
+		element = driver.findElement(By.id("request_ot_workspace_id"));
 		return element;
 	}
 	//Find field Group
 	public static WebElement txb_group(WebDriver driver) {
-		element = driver.findElement(By.id("select2-chosen-2"));
+		element = driver.findElement(By.id("group-selection"));
 		return element;
 	}
-	//Find field other Group
-	public static WebElement chb_otherGroup(WebDriver driver) {
+	//Find OT Group checkbox 
+	public static WebElement chb_OTGroup(WebDriver driver) {
 		element = driver.findElement(By.id("choose_other_group"));
 		return element;
 	}
+	
+	//Find field OTGroup
+		public static WebElement drd_OTGroup(WebDriver driver) {
+			element = driver.findElement(By.id("select2-drop-mask"));
+			return element;
+		}
 	//Find field Project
 	public static WebElement txb_project(WebDriver driver) {
 		element = driver.findElement(By.id("request_ot_project_name"));
@@ -73,6 +79,12 @@ public class PersonalRequestsOTPageObject {
 	//Find field Reason
 	public static WebElement btn_saveRequest(WebDriver driver) {
 		element = driver.findElement(By.xpath("//*[@id=\"new_request_ot\"]/input[3]"));
+		return element;
+	}
+	
+	//Find message create OT unsuccessfully
+	public static WebElement mess_requestOTUnsuccessfully(WebDriver driver) {
+		element = driver.findElement(By.className("text-danger"));
 		return element;
 	}
 }

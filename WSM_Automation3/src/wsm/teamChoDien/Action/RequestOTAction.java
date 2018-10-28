@@ -11,11 +11,11 @@ public static void requestOT(WebDriver driver,String branch, String group, Strin
 		
 		// Input data into branch field
 		Select branchSelete = new Select(PersonalRequestsOTPageObject.txb_branch(driver));
-		branchSelete.selectByVisibleText(branch);
+		branchSelete.selectByValue(branch);
 		
 		// Input data into group field
 		Select groupSelete = new Select(PersonalRequestsOTPageObject.txb_group(driver));
-		groupSelete.selectByVisibleText(group);
+		groupSelete.selectByValue(group);
 		
 		// Input data into project field
 		PersonalRequestsOTPageObject.txb_project(driver).sendKeys(project);;
