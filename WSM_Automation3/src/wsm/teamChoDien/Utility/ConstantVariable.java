@@ -29,5 +29,8 @@ public class ConstantVariable {
     
     public static final String PASSWORD_BLANK_MESSAGE = "Password is required";
     
+    public static final String LOGOUT_SUCCESSFULY_MESSAGE = "Signed out successfully.";
+  
     public static final String FORGOTPASSWORD_TITLE = "FORGOT PASSWORD";
+
 }
