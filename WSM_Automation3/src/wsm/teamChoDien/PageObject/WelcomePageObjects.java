@@ -13,5 +13,11 @@ public class WelcomePageObjects {
 		element = driver.findElement(By.xpath("//a[@class='wsm-btn btn-login']"));
 		return element;
 	}
+	
+	// Finding element UI of Log out successfully message
+	public static WebElement mess_logoutsuccessfully(WebDriver driver) {	
+		element = driver.findElement(By.xpath("//div[contains(text(),'Signed out successfully.')]"));
+		return element;
+	}
 
 }
