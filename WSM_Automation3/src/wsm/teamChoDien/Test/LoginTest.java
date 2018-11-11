@@ -1,10 +1,11 @@
 package wsm.teamChoDien.Test;
 
+import org.apache.commons.logging.Log;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import wsm.teamChoDien.Action.ClosePopupDayOffAction;
 import wsm.teamChoDien.Action.LoginAction;
 import wsm.teamChoDien.Action.TransitionPageAction;
@@ -89,6 +90,45 @@ public class LoginTest extends CommonTest {
 
 	}
 
+	// LOGIN_001 ~ 003
+	@Test
+	public void checkComponents() throws Exception {
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(LoginPageObjects.txt_title(driver)));
+
+		// F001 check Title
+		String title = LoginPageObjects.txt_title(driver).getText();
+		Assert.assertEquals(title, "LOGIN");
+
+		// F001 check Email textbox
+		Assert.assertTrue(LoginPageObjects.txt_UserEmail(driver).isDisplayed(), "Email textbox failed");
+		LoginPageObjects.txt_UserEmail(driver).sendKeys("123");
+
+		// F001 check Pass textbox
+		Assert.assertTrue(LoginPageObjects.txt_Password(driver).isDisplayed(), "Pass textbox Failed");
+
+		// F001 check Remember checkbox
+		Assert.assertTrue(LoginPageObjects.txt_RememberLogin(driver).isDisplayed(), "Remember checkbox Failed");
+
+		// F001 check OK button
+		Assert.assertTrue(LoginPageObjects.btn_Login(driver).isDisplayed(), "OK button failed");
+
+		// F001 check Cancel button
+		Assert.assertTrue(LoginPageObjects.btn_Cancel(driver).isDisplayed(), "Cancel button failed");
+
+		// F001 check Forgot pass link
+		Assert.assertTrue(LoginPageObjects.link_ForgotPass(driver).isDisplayed(), "Forgot pass link failed");
+
+		// F002 check initial value of remember checkbox
+		Assert.assertFalse(LoginPageObjects.txt_RememberLogin(driver).isSelected(), "Initial remember checkbox failed");
+  
+    // F003 check pass encrypted
+		String type = LoginPageObjects.txt_Password(driver).getAttribute("type");
+		Assert.assertEquals(type, "password", "password encrypted Failed");
+  
 	// LOGIN_010 - Login unsuccessfully with blank Email or Password
 	@Test
 	public void mess_loginWithBlankEmail() throws Exception {
@@ -166,5 +206,5 @@ public class LoginTest extends CommonTest {
 		System.out.println(expectedResult);
 		Assert.assertEquals(expectedResult, ConstantVariable.USERNAME_INVALID_MESSAGE);
 	}
-
+	}
 }
