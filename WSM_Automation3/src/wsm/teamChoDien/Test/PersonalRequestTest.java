@@ -37,18 +37,16 @@ public class PersonalRequestTest extends CommonTest {
 		String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
 
 		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
-				ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, ConstantVariable.RESON_OT);
+				ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, ConstantVariable.REASON_OT);
 
 		// Get message
-		boolean messDisplay = PersonalRequestsOTPageObject.mess_requestOTUnsuccessfully(driver).isDisplayed();
+		System.out.println("====" + PersonalRequestsOTPageObject.mess_requestOTUnsuccessfully(driver).getText());
 
-		// Verify Result message
-		if (messDisplay = true) {
-			Assert.assertEquals(PersonalRequestsOTPageObject.mess_requestOTUnsuccessfully(driver).getText(),
-					ConstantVariable.REQUEST_OT_DATE_IN_PAST_MESS);
-		} else {
-			Assert.fail("Error message does not display");
-		}
+		System.out.println("====" + ConstantVariable.REQUEST_OT_DATE_IN_PAST_MESS);
+
+		// Verify Result message successfully
+		Assert.assertEquals(PersonalRequestsOTPageObject.mess_requestOTUnsuccessfully(driver).getText(),
+				ConstantVariable.REQUEST_OT_DATE_IN_PAST_MESS);
 	}
 
 	// PER_REQ_OT_019
@@ -71,7 +69,7 @@ public class PersonalRequestTest extends CommonTest {
 		String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
 
 		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID, " ",
-				requestDateFrom, requestDateTo, ConstantVariable.RESON_OT);
+				requestDateFrom, requestDateTo, ConstantVariable.REASON_OT);
 
 		// Get message
 		boolean messDisplay = PersonalRequestsOTPageObject.mess_requestOTUnsuccessfully(driver).isDisplayed();
@@ -88,22 +86,6 @@ public class PersonalRequestTest extends CommonTest {
 	// PER_REQ_OT_020
 	@Test
 	public void invalid_requestFromDateBlank() throws Exception {
-		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
-				ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, ConstantVariable.REASON_OT);
-
-		// Get message
-		System.out.println("====" + PersonalRequestsOTPageObject.mess_requestOTUnsuccessfully(driver).getText());
-
-		System.out.println("====" + ConstantVariable.REQUEST_OT_DATE_IN_PAST_MESS);
-
-		// Verify Result message successfully
-		Assert.assertEquals(PersonalRequestsOTPageObject.mess_requestOTUnsuccessfully(driver).getText(),
-				ConstantVariable.REQUEST_OT_DATE_IN_PAST_MESS);
-	}
-
-	// PER_REQ_OT_011
-	@Test
-	public void valid_NotCheckedOTGroup() throws Exception {
 		// Go to Login Page
 		TransitionPageAction.gotoLoginPage(driver);
 
@@ -114,67 +96,48 @@ public class PersonalRequestTest extends CommonTest {
 		TransitionPageAction.gotoOvertimePage(driver);
 		TransitionPageAction.gotoRequestOTPage(driver);
 
-		// Input request OT
-		ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + LocalDate.now().getMonthValue();
-		ConstantVariable.REQUEST_OT_DATE = "/" + LocalDate.now().getDayOfMonth();
-		String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
+		
+			// Input request OT
+				ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + LocalDate.now().getMonthValue();
+				ConstantVariable.REQUEST_OT_DATE = "/" + LocalDate.now().getDayOfMonth();
+				String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
 
-		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
-				ConstantVariable.PROJECT_VALID, " ", requestDateTo, ConstantVariable.RESON_OT);
+				RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
+						ConstantVariable.PROJECT_VALID, " ", requestDateTo, ConstantVariable.REASON_OT);
 
-		// Get message
-		boolean messDisplay = PersonalRequestsOTPageObject.mess_fromDATEBlank(driver).isDisplayed();
+			// Get message
+				boolean messDisplay = PersonalRequestsOTPageObject.mess_fromDATEBlank(driver).isDisplayed();
 
-		// Verify Result message successfully
-		if (messDisplay = true) {
-			Assert.assertEquals(PersonalRequestsOTPageObject.mess_fromDATEBlank(driver).getText(),
-					ConstantVariable.FROM_DATE_BLANK_MESS);
-		} else {
-			Assert.fail("Error message does not display");
-		}
-	}
+				// Verify Result message successfully
+				if (messDisplay = true) {
+					Assert.assertEquals(PersonalRequestsOTPageObject.mess_fromDATEBlank(driver).getText(),
+							ConstantVariable.FROM_DATE_BLANK_MESS);
+				} else {
+					Assert.fail("Error message does not display");
+				}
+			}
 
+	
 	// PER_REQ_OT_021
 	@Test
 	public void invalid_requestToDateBlank() throws Exception {
+		// Go to Login Page
+				TransitionPageAction.gotoLoginPage(driver);
+
+				// Doing Login action with valid User name and password
+				LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+				// Go to request OT page
+				TransitionPageAction.gotoOvertimePage(driver);
+				TransitionPageAction.gotoRequestOTPage(driver);
+		
+			//Input request OT
 		ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + (LocalDate.now().getMonthValue());
 		ConstantVariable.REQUEST_OT_DATE = "/" + LocalDate.now().getDayOfMonth();
 		String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 18:00";
-		String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
+		
 		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
-				ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, ConstantVariable.REASON_OT);
-
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver)));
-
-		// Get message
-		String[] actual_message = PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver).getText().split("\n");
-
-		// Verify Result message successfully
-		Assert.assertEquals(actual_message[actual_message.length - 1],
-				ConstantVariable.CREATE_REQUEST_OT_SUCCESSFULY_MESSAGE);
-	}
-
-	// PER_REQ_OT_012
-	@Test
-	public void valid_CheckedOTGroup() throws Exception {
-		// Go to Login Page
-		TransitionPageAction.gotoLoginPage(driver);
-
-		// Doing Login action with valid User name and password
-		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
-
-		// Go to request OT page
-		TransitionPageAction.gotoOvertimePage(driver);
-		TransitionPageAction.gotoRequestOTPage(driver);
-
-		// Input request OT
-		ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + LocalDate.now().getMonthValue();
-		ConstantVariable.REQUEST_OT_DATE = "/" + LocalDate.now().getDayOfMonth();
-		String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 18:00";
-
-		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
-				ConstantVariable.PROJECT_VALID, requestDateFrom, "", ConstantVariable.RESON_OT);
+				ConstantVariable.PROJECT_VALID, requestDateFrom, "", ConstantVariable.REASON_OT);
 
 		// Get message
 		boolean messDisplay = PersonalRequestsOTPageObject.mess_toDATEBlank(driver).isDisplayed();
@@ -186,7 +149,25 @@ public class PersonalRequestTest extends CommonTest {
 		} else {
 			Assert.fail("Error message does not display");
 		}
+		
+		/*String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
+		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
+				ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, ConstantVariable.REASON_OT);
+
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver)));
+		
+		
+
+		// Get message
+		String[] actual_message = PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver).getText().split("\n");
+
+		// Verify Result message successfully
+		Assert.assertEquals(actual_message[actual_message.length - 1],
+				ConstantVariable.CREATE_REQUEST_OT_SUCCESSFULY_MESSAGE);*/
 	}
+
+	
 
 	// PER_REQ_OT_022
 	@Test
@@ -242,14 +223,14 @@ public class PersonalRequestTest extends CommonTest {
 		String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 18:00";
 		String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
 		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
-				ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, ConstantVariable.RESON_OT);
+				ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, ConstantVariable.REASON_OT);
 
 		// Create request OT in the second time
 		TransitionPageAction.gotoRequestOTPage(driver);
 		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
-				ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, ConstantVariable.RESON_OT);
+				ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, ConstantVariable.REASON_OT);
+		
 		// Get message
-
 		boolean messDisplay = PersonalRequestsOTPageObject.mess_requestOTUnsuccessfully(driver).isDisplayed();
 
 		// Verify Result message
@@ -259,24 +240,74 @@ public class PersonalRequestTest extends CommonTest {
 		} else {
 			Assert.fail("Error message does not display");
 		}
-		ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + (LocalDate.now().getMonthValue());
-		ConstantVariable.REQUEST_OT_DATE = "/" + LocalDate.now().getDayOfMonth();
-		String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 18:00";
-		String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
-		RequestOTAction.requestOTGroup(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
-				ConstantVariable.OT_GROUP_VALID, ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo,
-				ConstantVariable.REASON_OT);
-
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver)));
-
-		// Get message
-		String[] actual_message = PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver).getText().split("\n");
-
-		// Verify Result message successfully
-		Assert.assertEquals(actual_message[actual_message.length - 1],
-				ConstantVariable.CREATE_REQUEST_OT_SUCCESSFULY_MESSAGE);
 	}
+	
+	// PER_REQ_OT_011
+		@Test
+		public void valid_NotCheckedOTGroup() throws Exception {
+			// Go to Login Page
+			TransitionPageAction.gotoLoginPage(driver);
+
+			// Doing Login action with valid User name and password
+			LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+			// Go to request OT page
+			TransitionPageAction.gotoOvertimePage(driver);
+			TransitionPageAction.gotoRequestOTPage(driver);
+
+			// Input request OT
+			ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + (LocalDate.now().getMonthValue());
+			ConstantVariable.REQUEST_OT_DATE = "/" + LocalDate.now().getDayOfMonth();
+			String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 18:00";
+			String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
+			RequestOTAction.requestOTGroup(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
+					ConstantVariable.OT_GROUP_VALID, ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo,
+					ConstantVariable.REASON_OT);
+
+			WebDriverWait wait = new WebDriverWait(driver, 20);
+			wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver)));
+
+			// Get message
+			String[] actual_message = PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver).getText().split("\n");
+
+			// Verify Result message successfully
+			Assert.assertEquals(actual_message[actual_message.length - 1],
+					ConstantVariable.CREATE_REQUEST_OT_SUCCESSFULY_MESSAGE);
+		}
+			
+	
+	// PER_REQ_OT_012
+		@Test
+		public void valid_CheckedOTGroup() throws Exception {
+			// Go to Login Page
+			TransitionPageAction.gotoLoginPage(driver);
+
+			// Doing Login action with valid User name and password
+			LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+			// Go to request OT page
+			TransitionPageAction.gotoOvertimePage(driver);
+			TransitionPageAction.gotoRequestOTPage(driver);
+
+			// Input request OT
+			ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + LocalDate.now().getMonthValue();
+			ConstantVariable.REQUEST_OT_DATE = "/" + LocalDate.now().getDayOfMonth();
+			String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 18:00";
+			String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
+			RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
+					ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, ConstantVariable.REASON_OT);
+
+			WebDriverWait wait = new WebDriverWait(driver, 20);
+			wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver)));
+			
+
+			// Get message
+			String[] actual_message = PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver).getText().split("\n");
+
+			// Verify Result message successfully
+			Assert.assertEquals(actual_message[actual_message.length - 1],
+					ConstantVariable.CREATE_REQUEST_OT_SUCCESSFULY_MESSAGE);
+		}
 
 	// PER_REQ_OT_013
 	@Test

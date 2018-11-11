@@ -128,6 +128,8 @@ public class LoginTest extends CommonTest {
     // F003 check pass encrypted
 		String type = LoginPageObjects.txt_Password(driver).getAttribute("type");
 		Assert.assertEquals(type, "password", "password encrypted Failed");
+		
+	}
   
 	// LOGIN_010 - Login unsuccessfully with blank Email or Password
 	@Test
@@ -206,5 +208,5 @@ public class LoginTest extends CommonTest {
 		System.out.println(expectedResult);
 		Assert.assertEquals(expectedResult, ConstantVariable.USERNAME_INVALID_MESSAGE);
 	}
-	}
 }
+
