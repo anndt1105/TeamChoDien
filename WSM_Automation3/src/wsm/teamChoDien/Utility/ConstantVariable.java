@@ -37,7 +37,15 @@ public class ConstantVariable {
     // Request OT date
     public static String REQUEST_OT_YEAR_MONTH = "";
     public static String REQUEST_OT_DATE = "";
+    
+    //Message validate create unsuccessuly
+    public static final String PROJECT_BLANK_MESS = "Project name can not be blank";
+    public static final String FROM_DATE_BLANK_MESS = "From time not be blank";
+    public static final String TO_DATE_BLANK_MESS = "End time not be blank";
+    public static final String REASON_BLANK_MESS = "Reason not be blank";
+    public static final String DUPLICATE_REQUEST_MESS = "Request has been taken with other request";
     //Message create unsuccessuly
+
     public static final String REQUEST_OT_DATE_IN_PAST_MESS = "Timekeeping data of " +REQUEST_OT_DATE+" is not available, you can not access for this month!";
 	public static final String URL = "https://edev.framgia.vn/";
 
