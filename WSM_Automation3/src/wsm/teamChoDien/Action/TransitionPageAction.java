@@ -17,8 +17,9 @@ public class TransitionPageAction {
 	}
 	public static void gotoOvertimePage(WebDriver driver) {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.btn_overtime(driver)));
-
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.btn_personalRequest(driver)));
+		
+		DashboardPageObject.btn_personalRequest(driver).click();
 		DashboardPageObject.btn_overtime(driver).click();
 	}
 	

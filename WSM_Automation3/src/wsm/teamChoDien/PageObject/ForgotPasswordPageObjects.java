@@ -22,7 +22,8 @@ public class ForgotPasswordPageObjects {
 
 	// Finding element UI of OK button
 	public static WebElement btn_OK(WebDriver driver) {
-		element = driver.findElement(By.xpath("//*[@id='devise-forgot-password-form']/div[2]/button"));
+		element = driver
+				.findElement(By.cssSelector("#devise-forgot-password-form > div.text-center.pd-top-20 > button"));
 		return element;
 	}
 
@@ -34,7 +35,7 @@ public class ForgotPasswordPageObjects {
 
 	// Finding element UI of Back to Login link
 	public static WebElement link_BackToLogin(WebDriver driver) {
-		element = driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[2]/a"));
+		element = driver.findElement(By.xpath("//a[@class='btn-back-login']"));
 		return element;
 	}
 

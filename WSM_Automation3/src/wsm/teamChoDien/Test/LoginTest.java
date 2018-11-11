@@ -6,7 +6,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import wsm.teamChoDien.Action.ClosePopupDayOffAction;
 import wsm.teamChoDien.Action.LoginAction;
 import wsm.teamChoDien.Action.TransitionPageAction;
@@ -125,9 +124,87 @@ public class LoginTest extends CommonTest {
 
 		// F002 check initial value of remember checkbox
 		Assert.assertFalse(LoginPageObjects.txt_RememberLogin(driver).isSelected(), "Initial remember checkbox failed");
-
-		// F003 check pass encrypted
+  
+    // F003 check pass encrypted
 		String type = LoginPageObjects.txt_Password(driver).getAttribute("type");
 		Assert.assertEquals(type, "password", "password encrypted Failed");
+  
+	// LOGIN_010 - Login unsuccessfully with blank Email or Password
+	@Test
+	public void mess_loginWithBlankEmail() throws Exception {
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+		LoginPageObjects.txt_UserEmail(driver).clear();
+
+		// Doing Login action with valid User name and password
+		String username = "";
+		LoginAction.login(driver, username, ConstantVariable.PASSWORD);
+
+		// Verify Result
+		String expectedResult = LoginPageObjects.msg_ErrorMessageUserNameBlank(driver).getText();
+		System.out.println(expectedResult);
+		Assert.assertEquals(expectedResult, ConstantVariable.USERNAME_BLANK_MESSAGE);
+	}
+
+	@Test
+	public void mess_loginWithBlankPassword() throws Exception {
+		// Doing Login action with invalid info
+		TransitionPageAction.gotoLoginPage(driver);
+		String password = "";
+		LoginAction.login(driver, ConstantVariable.USERNAME, password);
+
+		// Verify Result
+		String expectedResult = LoginPageObjects.msg_ErrorMessagePasswordBlank(driver).getText();
+		System.out.println(expectedResult);
+		Assert.assertEquals(expectedResult, ConstantVariable.PASSWORD_BLANK_MESSAGE);
+	}
+
+	// LOGIN_011 - Login unsuccessfully with invalid email and invalid password
+	@Test
+	public void mess_loginWithInvalidInfo() throws Exception {
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+		LoginAction.login(driver, ConstantVariable.USERNAME_NOT_EXIST, ConstantVariable.PASSWORD);
+
+		// Verify Result
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(LoginPageObjects.msg_ErrorLoginMessage(driver)));
+
+		String expectedResult = LoginPageObjects.msg_ErrorLoginMessage(driver).getText();
+		System.out.println(expectedResult);
+		Assert.assertEquals(expectedResult, ConstantVariable.LOGIN_FAILED_MESSAGE);
+	}
+
+	// LOGIN_012 - Login unsuccessfully with valid email and invalid password
+	@Test
+	public void mess_loginWithInvalidPassword() throws Exception {
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.INVALID_PASSWORD);
+
+		// Verify Result
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(LoginPageObjects.msg_ErrorLoginMessage(driver)));
+
+		String expectedResult = LoginPageObjects.msg_ErrorLoginMessage(driver).getText();
+		System.out.println(expectedResult);
+		Assert.assertEquals(expectedResult, ConstantVariable.LOGIN_FAILED_MESSAGE);
+	}
+
+	// LOGIN_013 - Login unsuccessfully with invalid email and valid password
+	@Test
+	public void mess_loginWithInvalidEmail() throws Exception {
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+		LoginAction.login(driver, ConstantVariable.USERNAME_INVALID, ConstantVariable.PASSWORD);
+
+		// Verify Result
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(LoginPageObjects.msg_ErrorInvalidFormatEmail(driver)));
+
+		String expectedResult = LoginPageObjects.msg_ErrorInvalidFormatEmail(driver).getText();
+		System.out.println(expectedResult);
+		Assert.assertEquals(expectedResult, ConstantVariable.USERNAME_INVALID_MESSAGE);
+	}
 	}
 }
