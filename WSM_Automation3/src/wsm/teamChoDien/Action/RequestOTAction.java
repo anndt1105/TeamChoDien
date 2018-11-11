@@ -1,13 +1,7 @@
 package wsm.teamChoDien.Action;
 
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-
-import com.beust.jcommander.JCommander.Builder;
-
-import wsm.teamChoDien.PageObject.LoginPageObjects;
 import wsm.teamChoDien.PageObject.PersonalRequestsOTPageObject;
 
 public class RequestOTAction {
@@ -48,22 +42,21 @@ public class RequestOTAction {
 
 		// Input data into branch field
 		Select branchSelete = new Select(PersonalRequestsOTPageObject.txb_branch(driver));
-		branchSelete.selectByVisibleText(branch);
+		branchSelete.selectByValue(branch);
 
 		// Input data into group field
 		Select groupSelete = new Select(PersonalRequestsOTPageObject.txb_group(driver));
-		groupSelete.selectByVisibleText(group);
+		groupSelete.selectByValue(group);
 
 		// Selected checkbox OT group
 		PersonalRequestsOTPageObject.chb_OTGroup(driver).click();
 
 		// Selected group OT
-		Select OTGroupSelete = new Select(PersonalRequestsOTPageObject.txb_group(driver));
-		OTGroupSelete.selectByVisibleText(OTGroup);
+		Select OTGroupSelete = new Select(PersonalRequestsOTPageObject.drd_OTGroup(driver));
+		OTGroupSelete.selectByValue(OTGroup);
 
 		// Input data into project field
 		PersonalRequestsOTPageObject.txb_project(driver).sendKeys(project);
-		;
 
 		// Input data into From date field
 		PersonalRequestsOTPageObject.txb_from(driver).sendKeys(fromDate);
@@ -81,7 +74,6 @@ public class RequestOTAction {
 
 		// Save request
 		PersonalRequestsOTPageObject.btn_saveRequest(driver).click();
-		;
 	}
 
 }
