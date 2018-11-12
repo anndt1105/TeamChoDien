@@ -34,6 +34,11 @@ public class ConstantVariable {
 	public static final String REQUEST_OT_SCREEN_TITLE = "Request overtime";
 	public static final String MAIL_TITLE = "[WSM] Reset password instructions";
 	public static final String CHANGE_PASSWORD_SCREEN_TITLE = "CHANGE PASSWORD";
+  public static final String MESSAGE_PASSWORD_REQUIRED = "Password is required";
+	public static final String MESSAGE_PASSWORD_INVALID_LESS_6 = "Please enter at least 6 characters";
+	public static final String MESSAGE_PASSWORD_INVALID_OVER_129 = "Please enter max 128 characters";
+	public static final String MESSAGE_CONFIRMPASSWORD_NOT_MAP = "Please enter the same value again.";
+	public static final String PASSWORD_129 = "120216215610561561560156405120216215610561561560156405120216215610561561560156405120216215610561561560156405120216215610561012102";
     
     //PERSONAL REQUEST
 	// Branch 4=Da Nang Office
@@ -44,6 +49,7 @@ public class ConstantVariable {
 	
 	// OTGroup 1=Software Development Division 1
 	public static final String OT_GROUP_VALID = "1";
+
     public static final String PROJECT_VALID = "Beautiful Company";
     public static final String REASON_OT = "Because I love my Customer";
     
@@ -60,5 +66,4 @@ public class ConstantVariable {
     
     //Message create unsuccessfully
     public static final String REQUEST_OT_DATE_IN_PAST_MESS = "Timekeeping data of " +REQUEST_OT_DATE+" is not available, you can not access for this month!";
-
 }

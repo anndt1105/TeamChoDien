@@ -69,4 +69,28 @@ public class ForgotPasswordPageObjects {
 		element = driver.findElement(By.xpath("//p[contains(text(),'Email not found')]"));
 		return element;
 	}
+
+	// Finding element UI of Message sensd mail succesfull
+	public static WebElement btn_submitPassword(WebDriver driver) {
+		element = driver.findElement(By.xpath("//*[@id=\"devise-change-password-form\"]/div[3]/button"));
+		return element;
+	}
+
+	// Finding element UI of field new password
+	public static WebElement txt_NewPassword(WebDriver driver) {
+		element = driver.findElement(By.id("user_password"));
+		return element;
+	}
+
+	// Finding element UI of field confirm password
+	public static WebElement txt_ConfirmPassword(WebDriver driver) {
+		element = driver.findElement(By.id("user_password_confirmation"));
+		return element;
+	}
+
+	// Finding element UI of message confirm password is required
+	public static WebElement mess_PasswordError(WebDriver driver) {
+		element = driver.findElement(By.id("user_password_confirmation-error"));
+		return element;
+	}
 }
