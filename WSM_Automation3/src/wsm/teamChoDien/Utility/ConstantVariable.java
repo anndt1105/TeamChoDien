@@ -58,8 +58,18 @@ public class ConstantVariable {
 
 	public static final String REQUEST_OT_SCREEN_TITLE = "Request overtime";
 
+	// Message forgot password
 	public static final String MAIL_TITLE = "[WSM] Reset password instructions";
 
 	public static final String CHANGE_PASSWORD_SCREEN_TITLE = "CHANGE PASSWORD";
-
+	
+	public static final String MESSAGE_PASSWORD_REQUIRED = "Password is required";
+	
+	public static final String MESSAGE_PASSWORD_INVALID_LESS_6 = "Please enter at least 6 characters";
+	
+	public static final String MESSAGE_PASSWORD_INVALID_OVER_129 = "Please enter max 128 characters";
+	
+	public static final String MESSAGE_CONFIRMPASSWORD_NOT_MAP = "Please enter the same value again.";
+	
+	public static final String PASSWORD_129 = "120216215610561561560156405120216215610561561560156405120216215610561561560156405120216215610561561560156405120216215610561012102";
 }

@@ -245,19 +245,19 @@ public class ForgotPasswordTest extends CommonTest {
 
 		// Click OK button
 		ForgotPasswordPageObjects.btn_OK(driver).click();
-		
+
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(
 				"//p[contains(text(),'You will receive an email with instructions on how to reset your password in a few minutes')]")));
 
 		// Back to Login form
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", ForgotPasswordPageObjects.link_BackToLogin(driver));
-		
+
 		// Doing Login action with valid User name and password
 		wait.until(ExpectedConditions.visibilityOf(LoginPageObjects.btn_Login(driver)));
-		
+
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
-		
+
 		// Get message
 		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.mess_loginSuccess(driver)));
 
@@ -266,6 +266,207 @@ public class ForgotPasswordTest extends CommonTest {
 		// Verify Result message successfully
 		Assert.assertEquals(message[message.length - 1], ConstantVariable.LOGIN_SUCCESSFULY_MESSAGE);
 
+	}
+
+	// FOR_PASS_017
+	@Test
+	public void unsuccessfuly_ConfirmPasswordBlank() throws Exception {
+
+		// Go to login page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(LoginPageObjects.link_ForgotPass(driver)));
+
+		// Go to reset password page by click on Forgot password link
+		LoginPageObjects.link_ForgotPass(driver).click();
+
+		wait.until(ExpectedConditions.visibilityOf(ForgotPasswordPageObjects.btn_OK(driver)));
+
+		// Input email
+		ForgotPasswordPageObjects.txt_UserEmail(driver).sendKeys(ConstantVariable.USERNAME);
+
+		// Click OK button
+		ForgotPasswordPageObjects.btn_OK(driver).click();
+
+		// Go to yopmail
+		driver.get(ConstantVariable.YOP_MAIL_URL);
+
+		// Click on Change password link
+		driver.switchTo().frame("ifmail");
+
+		wait.until(ExpectedConditions.visibilityOf(YopMailPageObject.title_mail(driver)));
+
+		YopMailPageObject.lnk_ChangePassword(driver).click();
+
+		// Verify that Change password screen is displayed
+		SwitchChildWindown.switchChildWindown(driver);
+
+		wait.until(ExpectedConditions.visibilityOf(ChangePasswordPageObject.lb_ChangePassword(driver)));
+
+		// Input new password
+		ForgotPasswordPageObjects.txt_NewPassword(driver).sendKeys(ConstantVariable.PASSWORD);
+
+		// Click OK button
+		ForgotPasswordPageObjects.btn_submitPassword(driver);
+
+		// Verify mess is displayed
+		wait.until(ExpectedConditions.visibilityOf(ForgotPasswordPageObjects.mess_PasswordError(driver)));
+		String mess = ForgotPasswordPageObjects.mess_PasswordError(driver).getText();
+		Assert.assertEquals(mess, ConstantVariable.MESSAGE_PASSWORD_REQUIRED);
+	}
+
+	// FOR_PASS_018
+	@Test
+	public void unsuccessfuly_ConfirmPasswordLess6() throws Exception {
+
+		// Go to login page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(LoginPageObjects.link_ForgotPass(driver)));
+
+		// Go to reset password page by click on Forgot password link
+		LoginPageObjects.link_ForgotPass(driver).click();
+
+		wait.until(ExpectedConditions.visibilityOf(ForgotPasswordPageObjects.btn_OK(driver)));
+
+		// Input email
+		ForgotPasswordPageObjects.txt_UserEmail(driver).sendKeys(ConstantVariable.USERNAME);
+
+		// Click OK button
+		ForgotPasswordPageObjects.btn_OK(driver).click();
+
+		// Go to yopmail
+		driver.get(ConstantVariable.YOP_MAIL_URL);
+
+		// Click on Change password link
+		driver.switchTo().frame("ifmail");
+
+		wait.until(ExpectedConditions.visibilityOf(YopMailPageObject.title_mail(driver)));
+
+		YopMailPageObject.lnk_ChangePassword(driver).click();
+
+		// Verify that Change password screen is displayed
+		SwitchChildWindown.switchChildWindown(driver);
+
+		wait.until(ExpectedConditions.visibilityOf(ChangePasswordPageObject.lb_ChangePassword(driver)));
+
+		// Input new password
+		ForgotPasswordPageObjects.txt_NewPassword(driver).sendKeys(ConstantVariable.PASSWORD);
+
+		// Input new password
+		ForgotPasswordPageObjects.txt_ConfirmPassword(driver).sendKeys("1");
+
+		// Click OK button
+		ForgotPasswordPageObjects.btn_submitPassword(driver);
+
+		// Verify mess is displayed
+		wait.until(ExpectedConditions.visibilityOf(ForgotPasswordPageObjects.mess_PasswordError(driver)));
+		String mess = ForgotPasswordPageObjects.mess_PasswordError(driver).getText();
+		Assert.assertEquals(mess, ConstantVariable.MESSAGE_PASSWORD_INVALID_6);
+	}
+
+	// FOR_PASS_019
+	@Test
+	public void unsuccessfuly_ConfirmPasswordOver128() throws Exception {
+
+		// Go to login page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(LoginPageObjects.link_ForgotPass(driver)));
+
+		// Go to reset password page by click on Forgot password link
+		LoginPageObjects.link_ForgotPass(driver).click();
+
+		wait.until(ExpectedConditions.visibilityOf(ForgotPasswordPageObjects.btn_OK(driver)));
+
+		// Input email
+		ForgotPasswordPageObjects.txt_UserEmail(driver).sendKeys(ConstantVariable.USERNAME);
+
+		// Click OK button
+		ForgotPasswordPageObjects.btn_OK(driver).click();
+
+		// Go to yopmail
+		driver.get(ConstantVariable.YOP_MAIL_URL);
+
+		// Click on Change password link
+		driver.switchTo().frame("ifmail");
+
+		wait.until(ExpectedConditions.visibilityOf(YopMailPageObject.title_mail(driver)));
+
+		YopMailPageObject.lnk_ChangePassword(driver).click();
+
+		// Verify that Change password screen is displayed
+		SwitchChildWindown.switchChildWindown(driver);
+
+		wait.until(ExpectedConditions.visibilityOf(ChangePasswordPageObject.lb_ChangePassword(driver)));
+
+		// Input new password
+		ForgotPasswordPageObjects.txt_NewPassword(driver).sendKeys(ConstantVariable.PASSWORD);
+
+		// Input new password
+		ForgotPasswordPageObjects.txt_ConfirmPassword(driver).sendKeys(ConstantVariable.PASSWORD_129);
+
+		// Click OK button
+		ForgotPasswordPageObjects.btn_submitPassword(driver);
+
+		// Verify mess is displayed
+		wait.until(ExpectedConditions.visibilityOf(ForgotPasswordPageObjects.mess_PasswordError(driver)));
+		String mess = ForgotPasswordPageObjects.mess_PasswordError(driver).getText();
+		Assert.assertEquals(mess, ConstantVariable.MESSAGE_PASSWORD_INVALID_OVER_129);
+	}
+
+	// FOR_PASS_020
+	@Test
+	public void unsuccessfuly_ConfirmPasswordNotMap() throws Exception {
+
+		// Go to login page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(LoginPageObjects.link_ForgotPass(driver)));
+
+		// Go to reset password page by click on Forgot password link
+		LoginPageObjects.link_ForgotPass(driver).click();
+
+		wait.until(ExpectedConditions.visibilityOf(ForgotPasswordPageObjects.btn_OK(driver)));
+
+		// Input email
+		ForgotPasswordPageObjects.txt_UserEmail(driver).sendKeys(ConstantVariable.USERNAME);
+
+		// Click OK button
+		ForgotPasswordPageObjects.btn_submitPassword(driver);
+
+		// Go to yopmail
+		driver.get(ConstantVariable.YOP_MAIL_URL);
+
+		// Click on Change password link
+		driver.switchTo().frame("ifmail");
+
+		wait.until(ExpectedConditions.visibilityOf(YopMailPageObject.title_mail(driver)));
+
+		YopMailPageObject.lnk_ChangePassword(driver).click();
+
+		// Verify that Change password screen is displayed
+		SwitchChildWindown.switchChildWindown(driver);
+
+		wait.until(ExpectedConditions.visibilityOf(ChangePasswordPageObject.lb_ChangePassword(driver)));
+
+		// Input new password
+		ForgotPasswordPageObjects.txt_NewPassword(driver).sendKeys(ConstantVariable.PASSWORD);
+
+		// Input new password
+		ForgotPasswordPageObjects.txt_ConfirmPassword(driver).sendKeys(ConstantVariable.PASSWOR + "1");
+
+		// Click OK button
+		ForgotPasswordPageObjects.btn_OK(driver).click();
+
+		// Verify mess is displayed
+		wait.until(ExpectedConditions.visibilityOf(ForgotPasswordPageObjects.mess_PasswordError(driver)));
+		String mess = ForgotPasswordPageObjects.mess_PasswordError(driver).getText();
+		Assert.assertEquals(mess, ConstantVariable.MESSAGE_CONFIRMPASSWORD_NOT_MAP);
 	}
 
 }
