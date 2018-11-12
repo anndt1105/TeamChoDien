@@ -13,9 +13,10 @@ public class LoginAction {
 
 		// Input data into password field
 		LoginPageObjects.txt_Password(driver).sendKeys(password);
-
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.visibilityOf(LoginPageObjects.btn_Login(driver)));
+		Thread.sleep(100);
+		
+		//WebDriverWait wait = new WebDriverWait(driver, 20); 
+		//wait.until(ExpectedCondition.(LoginPageObjects.btn_Login(driver)))
 
 		// Click button Login
 		LoginPageObjects.btn_Login(driver).click();
