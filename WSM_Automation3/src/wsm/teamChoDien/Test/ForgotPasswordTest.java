@@ -364,7 +364,7 @@ public class ForgotPasswordTest extends CommonTest {
 		// Verify mess is displayed
 		wait.until(ExpectedConditions.visibilityOf(ForgotPasswordPageObjects.mess_PasswordError(driver)));
 		String mess = ForgotPasswordPageObjects.mess_PasswordError(driver).getText();
-		Assert.assertEquals(mess, ConstantVariable.MESSAGE_PASSWORD_INVALID_6);
+		Assert.assertEquals(mess, ConstantVariable.MESSAGE_PASSWORD_INVALID_LESS_6);
 	}
 
 	// FOR_PASS_019
@@ -458,7 +458,7 @@ public class ForgotPasswordTest extends CommonTest {
 		ForgotPasswordPageObjects.txt_NewPassword(driver).sendKeys(ConstantVariable.PASSWORD);
 
 		// Input new password
-		ForgotPasswordPageObjects.txt_ConfirmPassword(driver).sendKeys(ConstantVariable.PASSWOR + "1");
+		ForgotPasswordPageObjects.txt_ConfirmPassword(driver).sendKeys(ConstantVariable.PASSWORD + "1");
 
 		// Click OK button
 		ForgotPasswordPageObjects.btn_OK(driver).click();
