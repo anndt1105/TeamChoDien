@@ -93,4 +93,12 @@ public class ForgotPasswordPageObjects {
 		element = driver.findElement(By.id("user_password_confirmation-error"));
 		return element;
 	}
+	
+	// Finding element UI of message change password successfully
+	public static WebElement mess_ChangePassSuccess(WebDriver driver) {
+		element = driver.findElement(By.xpath("//*[@id=\"main-container\"]/div[2]/div[1]"));
+		return element;
+	}
+	
+	
 }

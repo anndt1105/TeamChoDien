@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import wsm.teamChoDien.Action.LoginAction;
 import wsm.teamChoDien.Action.RequestOTAction;
 import wsm.teamChoDien.Action.TransitionPageAction;
+import wsm.teamChoDien.PageObject.LoginPageObjects;
 import wsm.teamChoDien.PageObject.PersonalRequestsOTPageObject;
 import wsm.teamChoDien.PageObject.RequestOvertimePageObject;
 import wsm.teamChoDien.Utility.ConstantVariable;
@@ -403,5 +404,72 @@ public class PersonalRequestTest extends CommonTest {
 		String expected_title = ConstantVariable.REQUEST_OT_SCREEN_TITLE;
 		Assert.assertEquals(actual_title, expected_title);
 	}
+	
+	//PERSONAL_REQUEST_001
+	@Test
+	public void loginSessionOTPage() throws Exception {
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
 
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+		// Go to request OT page
+		TransitionPageAction.gotoOvertimePage(driver);
+		
+		// Verify that Request OT screen is displayed
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(RequestOvertimePageObject.lb_title(driver)));
+		String actual_title = RequestOvertimePageObject.lb_title(driver).getText();
+		String expected_title = ConstantVariable.REQUEST_OT_SCREEN_TITLE;
+		Assert.assertEquals(actual_title, expected_title);
+	}
+	
+	//PERSONAL_REQUEST_002
+	@Test
+	public void noLoginSessionOTPage() throws Exception {
+		// Go to request OT page by direct URL
+		driver.get(ConstantVariable.OT_URL);
+		
+		//Verify Login page displays
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(LoginPageObjects.txt_title(driver)));
+
+		//Check Title
+		String title = LoginPageObjects.txt_title(driver).getText();
+		Assert.assertEquals(title, "LOGIN");		
+	}
+	
+	//PERSONAL_REQUEST_003
+	@Test
+	public void requestOTPagedisplays() throws Exception {
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+		// Go to request OT page
+		TransitionPageAction.gotoOvertimePage(driver);
+		TransitionPageAction.gotoRequestOTPage(driver);
+		
+		//Check title
+		String title = PersonalRequestsOTPageObject.txt_titleOT(driver).getText();
+		Assert.assertEquals(title, ConstantVariable.OT_title);
+	}
+	
+	//PERSONAL_REQUEST_004
+	@Test
+	public void requestOTComponent() throws Exception {
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+		// Go to request OT page
+		TransitionPageAction.gotoOvertimePage(driver);
+		TransitionPageAction.gotoRequestOTPage(driver);
+		
+	}
 }

@@ -6,6 +6,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import wsm.teamChoDien.Action.ClosePopupDayOffAction;
 import wsm.teamChoDien.Action.LoginAction;
 import wsm.teamChoDien.Action.SwitchChildWindown;
 import wsm.teamChoDien.Action.TransitionPageAction;
@@ -468,5 +470,94 @@ public class ForgotPasswordTest extends CommonTest {
 		String mess = ForgotPasswordPageObjects.mess_PasswordError(driver).getText();
 		Assert.assertEquals(mess, ConstantVariable.MESSAGE_CONFIRMPASSWORD_NOT_MAP);
 	}
+	
+	// FOR_PASS_013
+			@Test
+			public void successfuly_ChangePassword() throws Exception {
+
+				// Go to login page
+				TransitionPageAction.gotoLoginPage(driver);
+				WebDriverWait wait = new WebDriverWait(driver, 20);
+				wait.until(ExpectedConditions.visibilityOf(LoginPageObjects.link_ForgotPass(driver)));
+
+				// Go to reset password page by click on Forgot password link
+				LoginPageObjects.link_ForgotPass(driver).click();
+				wait.until(ExpectedConditions.visibilityOf(ForgotPasswordPageObjects.btn_OK(driver)));
+
+				// Input email
+				ForgotPasswordPageObjects.txt_UserEmail(driver).sendKeys(ConstantVariable.FORGOT_USERNAME);
+
+				// Click OK button
+				ForgotPasswordPageObjects.btn_OK(driver).click();
+
+				// Go to yopmail
+				driver.get(ConstantVariable.YOP_MAIL_URL);
+
+				// Click on Change password link
+				driver.switchTo().frame("ifmail");
+				wait.until(ExpectedConditions.visibilityOf(YopMailPageObject.title_mail(driver)));
+				YopMailPageObject.lnk_ChangePassword(driver).click();
+
+				// Verify that Change password screen is displayed
+				SwitchChildWindown.switchChildWindown(driver);
+				wait.until(ExpectedConditions.visibilityOf(ChangePasswordPageObject.lb_ChangePassword(driver)));
+
+				// Input new password
+				ForgotPasswordPageObjects.txt_NewPassword(driver).sendKeys(ConstantVariable.NEW_PASSWORD);
+				ForgotPasswordPageObjects.txt_ConfirmPassword(driver).sendKeys(ConstantVariable.NEW_PASSWORD);
+
+				// Click OK button
+				ForgotPasswordPageObjects.btn_submitPassword(driver);
+				
+				// Close popup Day off
+				ClosePopupDayOffAction.closePopup(driver);
+
+				// Verify mess is displayed
+				wait.until(ExpectedConditions.visibilityOf(ForgotPasswordPageObjects.mess_PasswordError(driver)));
+				String mess = ForgotPasswordPageObjects.mess_ChangePassSuccess(driver).getText();
+				Assert.assertEquals(mess, ConstantVariable.MESSAGE_CHANGEPASS_SUCCESS);
+				
+				//FOR_PASS_014 - Check Working Calendar screen displays
+				Assert.assertEquals(driver.getTitle(), ConstantVariable.TAB_TITLE);
+			}
+			
+		//FOR_PASS_015
+		@Test
+		public void loginSuccessWithNewPass() throws Exception {
+
+			// Go to Login Page
+			TransitionPageAction.gotoLoginPage(driver);
+
+			// Doing Login action with valid User name and password
+			LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.NEW_PASSWORD);
+
+			// Close pop-up Day off
+			ClosePopupDayOffAction.closePopup(driver);
+
+			// Get message
+			String[] message = DashboardPageObject.mess_loginSuccess(driver).getText().split("\n");
+
+			// Verify Result message successfully
+			Assert.assertEquals(message[message.length - 1], ConstantVariable.LOGIN_SUCCESSFULY_MESSAGE);
+		}
+		
+		//FOR_PASS_016
+			@Test
+			public void loginFailedWithOldPass() throws Exception {
+
+				// Go to Login Page
+				TransitionPageAction.gotoLoginPage(driver);
+
+				// Doing Login action with valid User name and password
+				LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.OLD_PASSWORD);
+
+				// Verify Result
+				WebDriverWait wait = new WebDriverWait(driver, 20);
+				wait.until(ExpectedConditions.visibilityOf(LoginPageObjects.msg_ErrorLoginMessage(driver)));
+
+				String expectedResult = LoginPageObjects.msg_ErrorLoginMessage(driver).getText();
+				System.out.println(expectedResult);
+				Assert.assertEquals(expectedResult, ConstantVariable.LOGIN_FAILED_MESSAGE);
+			}
 
 }
