@@ -27,7 +27,7 @@ public class ConstantVariable {
     		"You will receive an email with instructions on how to reset your password in a few minutes.";
     public static final String FORGOT_PASSWORD_BLANK_MESSAGE = "Password is required";
 	public static final String YOP_MAIL_URL = "http://www.yopmail.com/en/anndt";
-	//public static final String USERNAME = "anndt@yopmail.com";
+	public static final String FORGOT_USERNAME = "anndt@yopmail.com";
 	public static final String USERNAME_NOT_EXIT = "doan.ngoc.vu123@framgia.com";
 	public static final String FORGOTPASSWORD_TITLE = "FORGOT PASSWORD";
 	public static final String CREATE_REQUEST_OT_SUCCESSFULY_MESSAGE = "Request overtime create successfully!";
@@ -39,6 +39,12 @@ public class ConstantVariable {
 	public static final String MESSAGE_PASSWORD_INVALID_OVER_129 = "Please enter max 128 characters";
 	public static final String MESSAGE_CONFIRMPASSWORD_NOT_MAP = "Please enter the same value again.";
 	public static final String PASSWORD_129 = "120216215610561561560156405120216215610561561560156405120216215610561561560156405120216215610561561560156405120216215610561012102";
+	public static final String MESSAGE_CHANGEPASS_SUCCESS = "Your password has been changed successfully. You are now signed in." ;
+	public static final String NEW_PASSWORD = "123456" ;
+	public static final String OLD_PASSWORD = "12345678" ;
+	
+	
+	
     
     //PERSONAL REQUEST
 	// Branch 4=Da Nang Office
@@ -67,13 +73,18 @@ public class ConstantVariable {
     //Message create unsuccessfully
     public static final String REQUEST_OT_DATE_IN_PAST_MESS = "Timekeeping data of " +REQUEST_OT_DATE+" is not available, you can not access for this month!";
     
+    //OT Page direct URL
+    public static final String OT_URL = "https://edev.framgia.vn/en/dashboard/users/401/request_ots";
+    
+    //OT Title
+    public static final String OT_title = "New request for overtime";
+
     //FORGOT PASSWORD
     public static final String NEW_PASSWORD_LABEL = "New password";
     public static final String CONFIRM_NEW_PASSWORD_LABEL = "Password confirmation";
     
     //Personal request
     public static final String STAFF_NAME = "Nguyen Duc Truong An";
-	public static final String STAFF_CODE = "B120627";
-    
-    
+	  public static final String STAFF_CODE = "B120627";
+
 }
