@@ -34,7 +34,7 @@ public class ConstantVariable {
 	public static final String REQUEST_OT_SCREEN_TITLE = "Request overtime";
 	public static final String MAIL_TITLE = "[WSM] Reset password instructions";
 	public static final String CHANGE_PASSWORD_SCREEN_TITLE = "CHANGE PASSWORD";
-  public static final String MESSAGE_PASSWORD_REQUIRED = "Password is required";
+	public static final String MESSAGE_PASSWORD_REQUIRED = "Password is required";
 	public static final String MESSAGE_PASSWORD_INVALID_LESS_6 = "Please enter at least 6 characters";
 	public static final String MESSAGE_PASSWORD_INVALID_OVER_129 = "Please enter max 128 characters";
 	public static final String MESSAGE_CONFIRMPASSWORD_NOT_MAP = "Please enter the same value again.";
@@ -85,6 +85,17 @@ public class ConstantVariable {
     
     //Personal request
     public static final String STAFF_NAME = "Nguyen Duc Truong An";
-	  public static final String STAFF_CODE = "B120627";
+	public static final String STAFF_CODE = "B120627";
 
+	//Label
+	public static final String LABEL_STAFF_NAME = "Staff name";
+	public static final String LABEL_STAFF_CODE = "Staff code";
+	public static final String LABEL_BRANCH = "Branch";
+	public static final String LABEL_GROUP = "Group";
+	public static final String LABEL_DO_YOU_OT = "Do you OT for other group?";
+	public static final String LABEL_PROJECT = "Project";
+	public static final String LABEL_FROM = "From";
+	public static final String LABEL_TO = "To";
+	public static final String LABEL_REASON = "Reason";
+	
 }

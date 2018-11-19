@@ -126,4 +126,59 @@ public class PersonalRequestsOTPageObject {
 		element = driver.findElement(By.xpath("//*[@id=\"flash-message\"]"));
 		return element;
 	}
+	
+	//Find label Staff name
+	public static WebElement label_staffName(WebDriver driver) {
+		element = driver.findElement(By.xpath("//*[@id=\"new_request_ot\"]/div[1]/div[1]/label"));
+		return element;
+	}
+	
+	//Find label Staff code
+	public static WebElement label_staffCode(WebDriver driver) {
+		element = driver.findElement(By.xpath("//*[@id=\"new_request_ot\"]/div[1]/div[2]/label"));
+		return element;
+	}
+	
+	//Find label Branch
+	public static WebElement label_branch(WebDriver driver) {
+	element = driver.findElement(By.xpath("//*[@id=\"new_request_ot\"]/div[2]/div[1]/div/label"));
+	return element;
+	}
+	
+	//Find label Group
+	public static WebElement label_group(WebDriver driver) {
+	element = driver.findElement(By.xpath("//*[@id=\"new_request_ot\"]/div[2]/div[2]/div/label"));
+	return element;
+	}
+
+	// Find label Do you OT for other group
+	public static WebElement label_doYouOT(WebDriver driver) {
+		element = driver.findElement(By.xpath("//*[@id=\"new_request_ot\"]/div[3]/label/span"));
+		return element;
+	}
+
+	// Find label Project
+	public static WebElement label_project(WebDriver driver) {
+		element = driver.findElement(By.xpath("//*[@id=\"new_request_ot\"]/div[5]/label"));
+		return element;
+	}
+
+	// Find label From
+	public static WebElement label_from(WebDriver driver) {
+		element = driver.findElement(By.xpath("//*[@id=\"new_request_ot\"]/div[6]/div[1]/label"));
+		return element;
+	}
+	
+	//Find label To
+	public static WebElement label_to(WebDriver driver) {
+		element = driver.findElement(By.xpath("//*[@id=\"new_request_ot\"]/div[6]/div[2]/label"));
+		return element;
+	}
+	
+	//Find label Reason
+	public static WebElement label_reason(WebDriver driver) {
+		element = driver.findElement(By.xpath("//*[@id=\"new_request_ot\"]/div[7]/label"));
+		return element;
+	}
+	
 }
