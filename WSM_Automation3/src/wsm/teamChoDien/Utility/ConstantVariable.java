@@ -66,4 +66,14 @@ public class ConstantVariable {
     
     //Message create unsuccessfully
     public static final String REQUEST_OT_DATE_IN_PAST_MESS = "Timekeeping data of " +REQUEST_OT_DATE+" is not available, you can not access for this month!";
+    
+    //FORGOT PASSWORD
+    public static final String NEW_PASSWORD_LABEL = "New password";
+    public static final String CONFIRM_NEW_PASSWORD_LABEL = "Password confirmation";
+    
+    //Personal request
+    public static final String STAFF_NAME = "Nguyen Duc Truong An";
+	public static final String STAFF_CODE = "B120627";
+    
+    
 }
