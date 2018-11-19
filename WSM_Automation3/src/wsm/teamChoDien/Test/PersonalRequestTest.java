@@ -97,46 +97,44 @@ public class PersonalRequestTest extends CommonTest {
 		TransitionPageAction.gotoOvertimePage(driver);
 		TransitionPageAction.gotoRequestOTPage(driver);
 
-		
-			// Input request OT
-				ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + LocalDate.now().getMonthValue();
-				ConstantVariable.REQUEST_OT_DATE = "/" + LocalDate.now().getDayOfMonth();
-				String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
+		// Input request OT
+		ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + LocalDate.now().getMonthValue();
+		ConstantVariable.REQUEST_OT_DATE = "/" + LocalDate.now().getDayOfMonth();
+		String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
 
-				RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
-						ConstantVariable.PROJECT_VALID, " ", requestDateTo, ConstantVariable.REASON_OT);
+		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
+				ConstantVariable.PROJECT_VALID, " ", requestDateTo, ConstantVariable.REASON_OT);
 
-			// Get message
-				boolean messDisplay = PersonalRequestsOTPageObject.mess_fromDATEBlank(driver).isDisplayed();
+		// Get message
+		boolean messDisplay = PersonalRequestsOTPageObject.mess_fromDATEBlank(driver).isDisplayed();
 
-				// Verify Result message successfully
-				if (messDisplay = true) {
-					Assert.assertEquals(PersonalRequestsOTPageObject.mess_fromDATEBlank(driver).getText(),
-							ConstantVariable.FROM_DATE_BLANK_MESS);
-				} else {
-					Assert.fail("Error message does not display");
-				}
-			}
+		// Verify Result message successfully
+		if (messDisplay = true) {
+			Assert.assertEquals(PersonalRequestsOTPageObject.mess_fromDATEBlank(driver).getText(),
+					ConstantVariable.FROM_DATE_BLANK_MESS);
+		} else {
+			Assert.fail("Error message does not display");
+		}
+	}
 
-	
 	// PER_REQ_OT_021
 	@Test
 	public void invalid_requestToDateBlank() throws Exception {
 		// Go to Login Page
-				TransitionPageAction.gotoLoginPage(driver);
+		TransitionPageAction.gotoLoginPage(driver);
 
-				// Doing Login action with valid User name and password
-				LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
-				// Go to request OT page
-				TransitionPageAction.gotoOvertimePage(driver);
-				TransitionPageAction.gotoRequestOTPage(driver);
-		
-			//Input request OT
+		// Go to request OT page
+		TransitionPageAction.gotoOvertimePage(driver);
+		TransitionPageAction.gotoRequestOTPage(driver);
+
+		// Input request OT
 		ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + (LocalDate.now().getMonthValue());
 		ConstantVariable.REQUEST_OT_DATE = "/" + LocalDate.now().getDayOfMonth();
 		String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 18:00";
-		
+
 		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
 				ConstantVariable.PROJECT_VALID, requestDateFrom, "", ConstantVariable.REASON_OT);
 
@@ -150,25 +148,29 @@ public class PersonalRequestTest extends CommonTest {
 		} else {
 			Assert.fail("Error message does not display");
 		}
-		
-		/*String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
-		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
-				ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, ConstantVariable.REASON_OT);
 
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver)));
-		
-		
-
-		// Get message
-		String[] actual_message = PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver).getText().split("\n");
-
-		// Verify Result message successfully
-		Assert.assertEquals(actual_message[actual_message.length - 1],
-				ConstantVariable.CREATE_REQUEST_OT_SUCCESSFULY_MESSAGE);*/
+		/*
+		 * String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH +
+		 * ConstantVariable.REQUEST_OT_DATE + " 21:00";
+		 * RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID,
+		 * ConstantVariable.GROUP_VALID, ConstantVariable.PROJECT_VALID,
+		 * requestDateFrom, requestDateTo, ConstantVariable.REASON_OT);
+		 * 
+		 * WebDriverWait wait = new WebDriverWait(driver, 20);
+		 * wait.until(ExpectedConditions.visibilityOf(
+		 * PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver)));
+		 * 
+		 * 
+		 * 
+		 * // Get message String[] actual_message =
+		 * PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver).
+		 * getText().split("\n");
+		 * 
+		 * // Verify Result message successfully
+		 * Assert.assertEquals(actual_message[actual_message.length - 1],
+		 * ConstantVariable.CREATE_REQUEST_OT_SUCCESSFULY_MESSAGE);
+		 */
 	}
-
-	
 
 	// PER_REQ_OT_022
 	@Test
@@ -230,7 +232,7 @@ public class PersonalRequestTest extends CommonTest {
 		TransitionPageAction.gotoRequestOTPage(driver);
 		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
 				ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, ConstantVariable.REASON_OT);
-		
+
 		// Get message
 		boolean messDisplay = PersonalRequestsOTPageObject.mess_requestOTUnsuccessfully(driver).isDisplayed();
 
@@ -242,73 +244,71 @@ public class PersonalRequestTest extends CommonTest {
 			Assert.fail("Error message does not display");
 		}
 	}
-	
+
 	// PER_REQ_OT_011
-		@Test
-		public void valid_NotCheckedOTGroup() throws Exception {
-			// Go to Login Page
-			TransitionPageAction.gotoLoginPage(driver);
+	@Test
+	public void valid_NotCheckedOTGroup() throws Exception {
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
 
-			// Doing Login action with valid User name and password
-			LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
-			// Go to request OT page
-			TransitionPageAction.gotoOvertimePage(driver);
-			TransitionPageAction.gotoRequestOTPage(driver);
+		// Go to request OT page
+		TransitionPageAction.gotoOvertimePage(driver);
+		TransitionPageAction.gotoRequestOTPage(driver);
 
-			// Input request OT
-			ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + (LocalDate.now().getMonthValue());
-			ConstantVariable.REQUEST_OT_DATE = "/" + LocalDate.now().getDayOfMonth();
-			String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 18:00";
-			String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
-			RequestOTAction.requestOTGroup(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
-					ConstantVariable.OT_GROUP_VALID, ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo,
-					ConstantVariable.REASON_OT);
+		// Input request OT
+		ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + (LocalDate.now().getMonthValue());
+		ConstantVariable.REQUEST_OT_DATE = "/" + LocalDate.now().getDayOfMonth();
+		String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 18:00";
+		String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
+		RequestOTAction.requestOTGroup(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
+				ConstantVariable.OT_GROUP_VALID, ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo,
+				ConstantVariable.REASON_OT);
 
-			WebDriverWait wait = new WebDriverWait(driver, 20);
-			wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver)));
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver)));
 
-			// Get message
-			String[] actual_message = PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver).getText().split("\n");
+		// Get message
+		String[] actual_message = PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver).getText().split("\n");
 
-			// Verify Result message successfully
-			Assert.assertEquals(actual_message[actual_message.length - 1],
-					ConstantVariable.CREATE_REQUEST_OT_SUCCESSFULY_MESSAGE);
-		}
-			
-	
+		// Verify Result message successfully
+		Assert.assertEquals(actual_message[actual_message.length - 1],
+				ConstantVariable.CREATE_REQUEST_OT_SUCCESSFULY_MESSAGE);
+	}
+
 	// PER_REQ_OT_012
-		@Test
-		public void valid_CheckedOTGroup() throws Exception {
-			// Go to Login Page
-			TransitionPageAction.gotoLoginPage(driver);
+	@Test
+	public void valid_CheckedOTGroup() throws Exception {
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
 
-			// Doing Login action with valid User name and password
-			LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
-			// Go to request OT page
-			TransitionPageAction.gotoOvertimePage(driver);
-			TransitionPageAction.gotoRequestOTPage(driver);
+		// Go to request OT page
+		TransitionPageAction.gotoOvertimePage(driver);
+		TransitionPageAction.gotoRequestOTPage(driver);
 
-			// Input request OT
-			ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + LocalDate.now().getMonthValue();
-			ConstantVariable.REQUEST_OT_DATE = "/" + LocalDate.now().getDayOfMonth();
-			String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 18:00";
-			String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
-			RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
-					ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, ConstantVariable.REASON_OT);
+		// Input request OT
+		ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + LocalDate.now().getMonthValue();
+		ConstantVariable.REQUEST_OT_DATE = "/" + LocalDate.now().getDayOfMonth();
+		String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 18:00";
+		String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
+		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
+				ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, ConstantVariable.REASON_OT);
 
-			WebDriverWait wait = new WebDriverWait(driver, 20);
-			wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver)));
-			
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver)));
 
-			// Get message
-			String[] actual_message = PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver).getText().split("\n");
+		// Get message
+		String[] actual_message = PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver).getText().split("\n");
 
-			// Verify Result message successfully
-			Assert.assertEquals(actual_message[actual_message.length - 1],
-					ConstantVariable.CREATE_REQUEST_OT_SUCCESSFULY_MESSAGE);
-		}
+		// Verify Result message successfully
+		Assert.assertEquals(actual_message[actual_message.length - 1],
+				ConstantVariable.CREATE_REQUEST_OT_SUCCESSFULY_MESSAGE);
+	}
 
 	// PER_REQ_OT_013
 	@Test
@@ -443,7 +443,7 @@ public class PersonalRequestTest extends CommonTest {
 	//PERSONAL_REQUEST_003
 	@Test
 	public void requestOTPagedisplays() throws Exception {
-		// Go to Login Page
+    		// Go to Login Page
 		TransitionPageAction.gotoLoginPage(driver);
 
 		// Doing Login action with valid User name and password
@@ -452,15 +452,29 @@ public class PersonalRequestTest extends CommonTest {
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
 		TransitionPageAction.gotoRequestOTPage(driver);
-		
+    
 		//Check title
 		String title = PersonalRequestsOTPageObject.txt_titleOT(driver).getText();
 		Assert.assertEquals(title, ConstantVariable.OT_title);
 	}
-	
-	//PERSONAL_REQUEST_004
+  
+  //PERSONAL_REQUEST_004
 	@Test
 	public void requestOTComponent() throws Exception {
+    		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+		// Go to request OT page
+		TransitionPageAction.gotoOvertimePage(driver);
+		TransitionPageAction.gotoRequestOTPage(driver);
+    }
+
+	// PER_REQ_OT_005
+	@Test
+	public void checkboxDefault() throws Exception {
 		// Go to Login Page
 		TransitionPageAction.gotoLoginPage(driver);
 
@@ -470,6 +484,180 @@ public class PersonalRequestTest extends CommonTest {
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
 		TransitionPageAction.gotoRequestOTPage(driver);
-		
+
+		// Verify that Do you OT for other group? checkbox is unselected by
+		// default
+		Assert.assertFalse(PersonalRequestsOTPageObject.chb_OTGroup(driver).isSelected());
+	}
+
+	// PER_REQ_OT_006
+	// Check data staff Name
+	@Test
+	public void staffNameCorrect() throws Exception {
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+		// Go to request OT page
+		TransitionPageAction.gotoOvertimePage(driver);
+		TransitionPageAction.gotoRequestOTPage(driver);
+
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.txb_staffName(driver)));
+
+		// Verify that "Staff name" data is correct
+		Assert.assertEquals(PersonalRequestsOTPageObject.txb_staffName(driver).getAttribute("value"),
+				ConstantVariable.STAFF_NAME);
+	}
+
+	// Check can't edit staff Name
+	@Test
+	public void staffNameUneditable() throws Exception {
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+		// Go to request OT page
+		TransitionPageAction.gotoOvertimePage(driver);
+		TransitionPageAction.gotoRequestOTPage(driver);
+
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.txb_staffName(driver)));
+
+		// Verify that "Staff name" field is uneditable
+		Assert.assertFalse(PersonalRequestsOTPageObject.txb_staffName(driver).isEnabled());
+	}
+
+	// PER_REQ_OT_007
+	// Check data staff code
+	@Test
+	public void staffCodeCorrect() throws Exception {
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+		// Go to request OT page
+		TransitionPageAction.gotoOvertimePage(driver);
+		TransitionPageAction.gotoRequestOTPage(driver);
+
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.txb_staffCode(driver)));
+
+		// Verify that "Staff code" data is correct
+		Assert.assertEquals(PersonalRequestsOTPageObject.txb_staffCode(driver).getAttribute("value"),
+				ConstantVariable.STAFF_CODE);
+	}
+
+	// Check can't edit staff code
+	@Test
+	public void staffCodeUneditable() throws Exception {
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+		// Go to request OT page
+		TransitionPageAction.gotoOvertimePage(driver);
+		TransitionPageAction.gotoRequestOTPage(driver);
+
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.txb_staffCode(driver)));
+
+		// Verify that "Staff code" field is uneditable
+		Assert.assertFalse(PersonalRequestsOTPageObject.txb_staffCode(driver).isEnabled());
+	}
+
+	// PER_REQ_OT_008
+	// Check data Branch
+	@Test
+	public void checkBranch() throws Exception {
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+		// Go to request OT page
+		TransitionPageAction.gotoOvertimePage(driver);
+		TransitionPageAction.gotoRequestOTPage(driver);
+
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.txb_branch(driver)));
+
+		// Verify that "Branch" data is correct
+		Assert.assertEquals(PersonalRequestsOTPageObject.txb_branch(driver).getAttribute("value"),
+				ConstantVariable.BRANCH_VALID);
+	}
+
+	// Check can't edit Branch
+	@Test
+	public void checkBranchUneditable() throws Exception {
+
+	// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+		// Go to request OT page
+		TransitionPageAction.gotoOvertimePage(driver);
+		TransitionPageAction.gotoRequestOTPage(driver);
+
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.txb_branch(driver)));
+
+		// Verify that "Branch" data is correct
+		Assert.assertFalse(PersonalRequestsOTPageObject.txb_branch(driver).isEnabled());
+	}
+
+	// PER_REQ_OT_009
+	@Test
+	public void clickOTForOtherGroupCheckbox() throws Exception {
+
+    // Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+		// Go to request OT page
+		TransitionPageAction.gotoOvertimePage(driver);
+		TransitionPageAction.gotoRequestOTPage(driver);\
+      
+		WebDriverWait wait = new WebDriverWait(driver, 50);
+		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.chb_OTGroup(driver)));
+
+		// Click on Do you OT for other group checkbox
+		PersonalRequestsOTPageObject.chb_OTGroup(driver).click();
+
+		// Verify the displaying of Group other drop down
+		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.drd_OTGroup(driver)));
+		Assert.assertTrue(PersonalRequestsOTPageObject.drd_OTGroup(driver).isDisplayed());
+	}
+
+	// PER_REQ_OT_010
+	// @Test
+	public void checkGroup() throws Exception {
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+		// Go to request OT page
+		TransitionPageAction.gotoOvertimePage(driver);
+		TransitionPageAction.gotoRequestOTPage(driver);
+
+		// Verify that "Group" dropdown list displays with correct data when
+		// clicking on "Group" dropdown list
+		Assert.assertEquals(PersonalRequestsOTPageObject.txb_group(driver).getAttribute("value"),
+				ConstantVariable.GROUP_VALID);
 	}
 }
