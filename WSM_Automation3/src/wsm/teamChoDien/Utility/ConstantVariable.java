@@ -6,7 +6,7 @@ public class ConstantVariable {
 	public static final String URL = "https://edev.framgia.vn/";
  
 	//LOGIN PAGE
-    public static final String USERNAME = "nguyen.duc.truong.an@framgia.com.edev";
+    public static final String USERNAME = "anndt@yopmail.com";
     public static final String USERNAME_NOT_EXIST = "abc@framgia.com";
     public static final String USERNAME_INVALID = "nguyen.duc.truong.an";
     public static final String PASSWORD = "12345678";
@@ -48,13 +48,13 @@ public class ConstantVariable {
     
     //PERSONAL REQUEST
 	// Branch 4=Da Nang Office
-	public static final String BRANCH_VALID = "4";
+	public static final String BRANCH_VALID = "3";
 	
 	// Group 212=Software Development Division 3/Section 2/Group 2/Tbd
 	public static final String GROUP_VALID = "212";
 	
-	// OTGroup 1=Software Development Division 1
-	public static final String OT_GROUP_VALID = "1";
+	// OTGroup 2=Software Development Division HIGH
+	public static final String OT_GROUP_VALID = "62";
 
     public static final String PROJECT_VALID = "Beautiful Company";
     public static final String REASON_OT = "Because I love my Customer";
@@ -69,6 +69,7 @@ public class ConstantVariable {
     public static final String TO_DATE_BLANK_MESS = "End time not be blank";
     public static final String REASON_BLANK_MESS = "Reason not be blank";
     public static final String DUPLICATE_REQUEST_MESS = "Request has been taken with other request";
+    public static final String WORKINGTIME_REQUEST_MESS = "Time request ot invalid: it is not in time period request ot.";
     
     //Message create unsuccessfully
     public static final String REQUEST_OT_DATE_IN_PAST_MESS = "Timekeeping data of " +REQUEST_OT_DATE+" is not available, you can not access for this month!";
