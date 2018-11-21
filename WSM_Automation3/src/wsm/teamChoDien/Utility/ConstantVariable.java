@@ -4,9 +4,8 @@ public class ConstantVariable {
 
 	// BASE URL
 	public static final String URL = "https://edev.framgia.vn/";
-
 	// LOGIN PAGE
-	public static final String USERNAME = "nguyen.duc.truong.an@framgia.com.edev";
+	public static final String USERNAME = "anndt@yopmail.com";
 	public static final String USERNAME_NOT_EXIST = "abc@framgia.com";
 	public static final String USERNAME_INVALID = "nguyen.duc.truong.an";
 	public static final String PASSWORD = "12345678";
@@ -43,14 +42,14 @@ public class ConstantVariable {
 	public static final String OLD_PASSWORD = "12345678";
 
 	// PERSONAL REQUEST
-	// Branch 4=Da Nang Office
-	public static final String BRANCH_VALID = "4";
+	// Branch 3=Da Nang Office
+	public static final String BRANCH_VALID = "3";
 
-	// Group 212=Software Development Division 3/Section 2/Group 2/Tbd
+	// Group 62=Software Development Division 3/Section 2/Group 2/Tbd
 	public static final String GROUP_VALID = "212";
 
-	// OTGroup 1=Software Development Division 1
-	public static final String OT_GROUP_VALID = "1";
+	// OTGroup 2=Software Development Division HIGH
+	public static final String OT_GROUP_VALID = "62";
 
 	public static final String PROJECT_VALID = "Beautiful Company";
 	public static final String REASON_OT = "Because I love my Customer";
@@ -94,5 +93,4 @@ public class ConstantVariable {
 	public static final String LABEL_FROM = "From";
 	public static final String LABEL_TO = "To";
 	public static final String LABEL_REASON = "Reason";
-
 }

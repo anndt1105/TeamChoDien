@@ -15,13 +15,13 @@ public class PersonalRequestsOTPageObject {
 
 	// Find button Create Request Overtime
 	public static WebElement btn_createRequest(WebDriver driver) {
-		element = driver.findElement(By.xpath("//*[@id=\"main-container\"]/div[2]/div[2]/a"));
+		element = driver.findElement(By.xpath("//*[@id=\"main-container\"]/div[2]/div[3]/a"));
 		return element;
 	}
 
 	// Find button New request overtime
 	public static WebElement txt_titleNewRequest(WebDriver driver) {
-		element = driver.findElement(By.xpath("*[@id=\"main-container\"]/div[2]/div[2]/div/div/div[1]/h3"));
+		element = driver.findElement(By.xpath("//*[@id=\"main-container\"]/div[2]/div[2]/div/div/div[1]/h3"));
 		return element;
 	}
 

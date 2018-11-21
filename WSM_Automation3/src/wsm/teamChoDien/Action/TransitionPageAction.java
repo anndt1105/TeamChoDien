@@ -20,6 +20,7 @@ public class TransitionPageAction {
 		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.btn_personalRequest(driver)));
 		
 		DashboardPageObject.btn_personalRequest(driver).click();
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.btn_overtime(driver)));
 		DashboardPageObject.btn_overtime(driver).click();
 	}
 	

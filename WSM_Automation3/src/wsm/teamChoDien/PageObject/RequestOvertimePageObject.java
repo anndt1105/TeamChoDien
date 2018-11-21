@@ -14,6 +14,12 @@ public class RequestOvertimePageObject {
 		return element;
 	}
 
+	// Finding element Delete button
+	public static WebElement btn_deleteRequest(WebDriver driver) {
+		element = driver.findElement(By.xpath("//*[@id=\"main-container\"]/div[2]/div[5]/div[1]/div[2]/div/table/tbody/tr/td[11]/a[2]"));
+		return element;
+	}
+  
 	// Finding element Employee code column
 	public static WebElement col_EmployeeCode(WebDriver driver) {
 		element = driver.findElement(
