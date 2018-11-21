@@ -23,7 +23,7 @@ public class ForgotPasswordPageObjects {
 	// Finding element UI of OK button
 	public static WebElement btn_OK(WebDriver driver) {
 		element = driver
-				.findElement(By.cssSelector("#devise-forgot-password-form > div.text-center.pd-top-20 > button"));
+				.findElement(By.xpath("(//button[@class='wsm-btn login-success'])[2]"));
 		return element;
 	}
 
@@ -72,7 +72,7 @@ public class ForgotPasswordPageObjects {
 
 	// Finding element UI of Message sensd mail succesfull
 	public static WebElement btn_submitPassword(WebDriver driver) {
-		element = driver.findElement(By.xpath("//*[@id=\"devise-change-password-form\"]/div[3]/button"));
+		element = driver.findElement(By.name("button"));
 		return element;
 	}
 
