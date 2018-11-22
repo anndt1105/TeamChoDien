@@ -10,7 +10,7 @@ public class RequestOvertimePageObject {
 
 	// Finding element TITLE of Request Overtime button
 	public static WebElement lb_title(WebDriver driver) {
-		element = driver.findElement(By.xpath("//h1[text()='Request overtime']"));
+		element = driver.findElement(By.xpath("//*[@id=\"main-container\"]/div[2]/h1"));
 		return element;
 	}
 

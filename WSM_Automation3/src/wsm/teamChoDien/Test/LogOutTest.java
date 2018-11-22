@@ -12,7 +12,8 @@ import wsm.teamChoDien.Utility.ConstantVariable;
 
 public class LogOutTest extends CommonTest {
 
-	// LOGOUT_001_Verify that user logs out successfully when click to Log out button
+	// LOGOUT_001_Verify that user logs out successfully when click to Log out
+	// button
 	@Test
 	public void LOGOUT_001() throws Exception {
 
@@ -21,6 +22,12 @@ public class LogOutTest extends CommonTest {
 
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 
 		// Click on Avatar User
 		DashboardPageObject.btn_avatar(driver).click();
@@ -35,7 +42,8 @@ public class LogOutTest extends CommonTest {
 		Assert.assertEquals(actual_message, ConstantVariable.LOGOUT_SUCCESSFULY_MESSAGE);
 	}
 
-	// LOGOUT_002_Verify that system redirects to Login page when logged out successfully
+	// LOGOUT_002_Verify that system redirects to Login page when logged out
+	// successfully
 	@Test
 	public void LOGOUT_002() throws Exception {
 
@@ -45,13 +53,18 @@ public class LogOutTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Click on Avatar User
 		DashboardPageObject.btn_avatar(driver).click();
 
 		// Click on Avatar User
 		DashboardPageObject.btn_logout(driver).click();
 
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(WelcomePageObjects.btn_Login(driver)));
 
 		// Actual result:
@@ -62,7 +75,8 @@ public class LogOutTest extends CommonTest {
 		Assert.assertTrue(isLoginButtonDisplay);
 	}
 
-	// LOGOUT_003_Verify that user session is cleared when user logged out successfully
+	// LOGOUT_003_Verify that user session is cleared when user logged out
+	// successfully
 	@Test
 	public void LOGOUT_003() throws Exception {
 
@@ -71,6 +85,12 @@ public class LogOutTest extends CommonTest {
 
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 
 		// Click on Avatar User
 		DashboardPageObject.btn_avatar(driver).click();
@@ -81,7 +101,6 @@ public class LogOutTest extends CommonTest {
 		// Try to navigate to any screen
 		driver.get("https://edev.framgia.vn/en/dashboard/user_settings/edit");
 
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(WelcomePageObjects.btn_Login(driver)));
 
 		// Actual result:
@@ -92,7 +111,8 @@ public class LogOutTest extends CommonTest {
 		Assert.assertTrue(isLoginButtonDisplay);
 	}
 
-	// LOGOUT_004_Verify that system redirects to Login page when clicking Log out button at any page of WSM application successfully
+	// LOGOUT_004_Verify that system redirects to Login page when clicking Log out
+	// button at any page of WSM application successfully
 	@Test
 	public void LOGOUT_004() throws Exception {
 
@@ -101,6 +121,12 @@ public class LogOutTest extends CommonTest {
 
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 
 		// Click on Avatar User
 		DashboardPageObject.btn_avatar(driver).click();
@@ -113,8 +139,6 @@ public class LogOutTest extends CommonTest {
 
 		// Click on Avatar User
 		DashboardPageObject.btn_logout(driver).click();
-
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(WelcomePageObjects.btn_Login(driver)));
 
 		// Actual message:
@@ -132,7 +156,8 @@ public class LogOutTest extends CommonTest {
 
 	}
 
-	// LOGOUT_005_Verify that system does not redirect to any page when clicking on Back button of browser after logged out successfully
+	// LOGOUT_005_Verify that system does not redirect to any page when clicking on
+	// Back button of browser after logged out successfully
 	@Test
 	public void LOGOUT_005() throws Exception {
 
@@ -142,21 +167,24 @@ public class LogOutTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Click on Avatar User
 		DashboardPageObject.btn_avatar(driver).click();
 
 		// Click on Avatar User
 		DashboardPageObject.btn_logout(driver).click();
-		
+
 		// Click on Back button on browser
 		driver.navigate().back();
-		
-		// Actual result:
-		boolean isLoginButtonDisplay = WelcomePageObjects.btn_Login(driver).isDisplayed();
 
 		// Verify that system redirects to Login page when logged out
 		// successfully
-		Assert.assertTrue(isLoginButtonDisplay);
+		Assert.assertEquals(driver.getTitle(), ConstantVariable.TITLE);
 
 	}
 

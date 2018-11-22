@@ -1,12 +1,8 @@
 package wsm.teamChoDien.Test;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotEquals;
 
 import java.time.LocalDate;
-
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -15,13 +11,11 @@ import wsm.teamChoDien.Action.LoginAction;
 import wsm.teamChoDien.Action.RequestOTAction;
 import wsm.teamChoDien.Action.TransitionPageAction;
 import wsm.teamChoDien.PageObject.DashboardPageObject;
-import wsm.teamChoDien.PageObject.LoginPageObjects;
 import wsm.teamChoDien.PageObject.PersonalRequestsOTPageObject;
 import wsm.teamChoDien.PageObject.RequestOvertimePageObject;
 import wsm.teamChoDien.Utility.ConstantVariable;
 
 public class PersonalRequestTest extends CommonTest {
-
 	// PER_REQ_OT_018
 	@Test
 	public void TC18_invalid_requestInThePast() throws Exception {
@@ -53,16 +47,6 @@ public class PersonalRequestTest extends CommonTest {
 
 		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
 				ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, ConstantVariable.REASON_OT);
-
-		// Because system is not validate in this case so this code to Delete request
-		// for run another case below.
-		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
-		DashboardPageObject.popup_CloseDayOff(driver).click();
-		Thread.sleep(1000);
-		RequestOvertimePageObject.btn_deleteRequest(driver).click();
-		Alert alert = driver.switchTo().alert();
-		Thread.sleep(1000);
-		alert.accept();
 
 		// Get message when system validate on this case
 		boolean messDisplay = PersonalRequestsOTPageObject.mess_requestOTUnsuccessfully(driver).isDisplayed();
@@ -273,14 +257,16 @@ public class PersonalRequestTest extends CommonTest {
 
 		// Create request OT in the first time
 		ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + (LocalDate.now().getMonthValue());
-		ConstantVariable.REQUEST_OT_DATE = "/" + (LocalDate.now().getDayOfMonth() - 1);
+		ConstantVariable.REQUEST_OT_DATE = "/" + (LocalDate.now().getDayOfMonth() - 2);
 		String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 18:00";
 		String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
 		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
 				ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, ConstantVariable.REASON_OT);
 
 		// Create request OT in the second time
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
 		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
 		Thread.sleep(1000);
 		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
@@ -322,21 +308,11 @@ public class PersonalRequestTest extends CommonTest {
 
 		// Create request OT in the first time
 		ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + (LocalDate.now().getMonthValue());
-		ConstantVariable.REQUEST_OT_DATE = "/" + (LocalDate.now().getDayOfMonth() - 1);
+		ConstantVariable.REQUEST_OT_DATE = "/" + (LocalDate.now().getDayOfMonth());
 		String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 13:00";
 		String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 16:00";
 		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
 				ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, ConstantVariable.REASON_OT);
-
-		// Because system is not validate in this case so this code to Delete request
-		// for run another case below.
-		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
-		DashboardPageObject.popup_CloseDayOff(driver).click();
-		Thread.sleep(1000);
-		RequestOvertimePageObject.btn_deleteRequest(driver).click();
-		Alert alert = driver.switchTo().alert();
-		Thread.sleep(1000);
-		alert.accept();
 
 		// Get message when system validate this case
 		boolean messDisplay = PersonalRequestsOTPageObject.mess_requestOTUnsuccessfully(driver).isDisplayed();
@@ -374,7 +350,7 @@ public class PersonalRequestTest extends CommonTest {
 
 		// Input request OT
 		ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + (LocalDate.now().getMonthValue());
-		ConstantVariable.REQUEST_OT_DATE = "/" + (LocalDate.now().getDayOfMonth() - 2);
+		ConstantVariable.REQUEST_OT_DATE = "/" + (LocalDate.now().getDayOfMonth() - 3);
 		String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 18:00";
 		String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
 		RequestOTAction.requestOTGroup(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
@@ -415,7 +391,7 @@ public class PersonalRequestTest extends CommonTest {
 
 		// Input request OT
 		ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + LocalDate.now().getMonthValue();
-		ConstantVariable.REQUEST_OT_DATE = "/" + (LocalDate.now().getDayOfMonth()-3);
+		ConstantVariable.REQUEST_OT_DATE = "/" + (LocalDate.now().getDayOfMonth() - 4);
 		String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 18:00";
 		String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
 		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
@@ -455,7 +431,7 @@ public class PersonalRequestTest extends CommonTest {
 
 		// Input request OT
 		ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + (LocalDate.now().getMonthValue());
-		ConstantVariable.REQUEST_OT_DATE = "/" + (LocalDate.now().getDayOfMonth()-4);
+		ConstantVariable.REQUEST_OT_DATE = "/" + (LocalDate.now().getDayOfMonth() - 5);
 		String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 18:00";
 		String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
 		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
@@ -538,7 +514,7 @@ public class PersonalRequestTest extends CommonTest {
 
 		// Input request OT
 		ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + (LocalDate.now().getMonthValue());
-		ConstantVariable.REQUEST_OT_DATE = "/" + (LocalDate.now().getDayOfMonth()-5);
+		ConstantVariable.REQUEST_OT_DATE = "/" + (LocalDate.now().getDayOfMonth() - 6);
 		String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 18:00";
 		String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
 		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
@@ -571,9 +547,10 @@ public class PersonalRequestTest extends CommonTest {
 		DashboardPageObject.popup_CloseDayOff(driver).click();
 
 		// Go to request OT page
+		Thread.sleep(1000);
 		TransitionPageAction.gotoOvertimePage(driver);
 		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
-    DashboardPageObject.popup_CloseDayOff(driver).click();
+		DashboardPageObject.popup_CloseDayOff(driver).click();
 
 		// Verify that Request OT screen is displayed
 		wait.until(ExpectedConditions.visibilityOf(RequestOvertimePageObject.lb_title(driver)));
@@ -586,15 +563,16 @@ public class PersonalRequestTest extends CommonTest {
 	@Test
 	public void TC2_noLoginSessionOTPage() throws Exception {
 		// Go to request OT page by direct URL
-		driver.get(ConstantVariable.OT_URL);
+		// driver.get(ConstantVariable.OT_URL);
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
+		driver.navigate().to(ConstantVariable.OT_URL);
 
 		// Verify Login page displays
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.visibilityOf(LoginPageObjects.txt_title(driver)));
 
 		// Check Title
 		// String title = LoginPageObjects.txt_title(driver).getText();
-		Assert.assertTrue(LoginPageObjects.btn_Login(driver).isDisplayed());
+		Assert.assertEquals(driver.getTitle(), ConstantVariable.TITLE);
 	}
 
 	// PERSONAL_REQUEST_003
@@ -610,9 +588,9 @@ public class PersonalRequestTest extends CommonTest {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
 		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 
 		// Go to request OT page
-		Thread.sleep(1000);
 		TransitionPageAction.gotoOvertimePage(driver);
 		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
 		DashboardPageObject.popup_CloseDayOff(driver).click();
@@ -632,13 +610,20 @@ public class PersonalRequestTest extends CommonTest {
 		TransitionPageAction.gotoLoginPage(driver);
 
 		// Doing Login action with valid User name and password
-		LoginAction.login(driver, ConstantVariable.FORGOT_USERNAME, ConstantVariable.PASSWORD);
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
-
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.label_staffName(driver)));
 
 		// Verify Result
@@ -655,11 +640,18 @@ public class PersonalRequestTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
-
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.txb_staffName(driver)));
 
 		// Verify Result
@@ -675,11 +667,18 @@ public class PersonalRequestTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
-
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.label_staffCode(driver)));
 
 		// Verify Result
@@ -696,12 +695,18 @@ public class PersonalRequestTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
-
-		// Check Staff name label and textbox
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.txb_staffCode(driver)));
 
 		// Verify Result
@@ -717,11 +722,18 @@ public class PersonalRequestTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
-
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.label_branch(driver)));
 
 		// Verify Result
@@ -737,12 +749,18 @@ public class PersonalRequestTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
-
-		// Check Staff name label and textbox
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.txb_branch(driver)));
 
 		// Verify Result
@@ -758,11 +776,18 @@ public class PersonalRequestTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
-
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.label_group(driver)));
 
 		// Verify Result
@@ -778,12 +803,18 @@ public class PersonalRequestTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
-
-		// Check Staff name label and textbox
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.txb_group(driver)));
 
 		// Verify Result
@@ -799,11 +830,18 @@ public class PersonalRequestTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
-
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.label_doYouOT(driver)));
 
 		// Verify Result
@@ -820,11 +858,18 @@ public class PersonalRequestTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
-
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.label_project(driver)));
 
 		// Verify Result
@@ -841,12 +886,18 @@ public class PersonalRequestTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
-
-		// Check Staff name label and textbox
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.txb_project(driver)));
 
 		// Verify Result
@@ -866,13 +917,14 @@ public class PersonalRequestTest extends CommonTest {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
 		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
 		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
 		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.label_from(driver)));
 
 		// Verify Result
@@ -888,12 +940,18 @@ public class PersonalRequestTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
-
-		// Check Staff name label and textbox
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.txb_from(driver)));
 
 		// Verify Result
@@ -909,11 +967,18 @@ public class PersonalRequestTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
-
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.label_to(driver)));
 
 		// Verify Result
@@ -929,12 +994,18 @@ public class PersonalRequestTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
-
-		// Check Staff name label and textbox
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.txb_to(driver)));
 
 		// Verify Result
@@ -950,11 +1021,18 @@ public class PersonalRequestTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
-
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.label_reason(driver)));
 
 		// Verify Result
@@ -970,12 +1048,18 @@ public class PersonalRequestTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
-
-		// Check Staff name label and textbox
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.txb_reason(driver)));
 
 		// Verify Result
@@ -995,14 +1079,15 @@ public class PersonalRequestTest extends CommonTest {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
 		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 
 		// Go to request OT page
-		Thread.sleep(1000);
 		TransitionPageAction.gotoOvertimePage(driver);
 		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
 		DashboardPageObject.popup_CloseDayOff(driver).click();
 		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
+		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.chb_OTGroup(driver)));
 
 		// Verify that Do you OT for other group? checkbox is unselected by
 		// default
@@ -1023,9 +1108,9 @@ public class PersonalRequestTest extends CommonTest {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
 		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 
 		// Go to request OT page
-		Thread.sleep(1000);
 		TransitionPageAction.gotoOvertimePage(driver);
 		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
 		DashboardPageObject.popup_CloseDayOff(driver).click();
@@ -1053,9 +1138,9 @@ public class PersonalRequestTest extends CommonTest {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
 		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 
 		// Go to request OT page
-		Thread.sleep(1000);
 		TransitionPageAction.gotoOvertimePage(driver);
 		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
 		DashboardPageObject.popup_CloseDayOff(driver).click();
@@ -1084,9 +1169,9 @@ public class PersonalRequestTest extends CommonTest {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
 		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 
 		// Go to request OT page
-		Thread.sleep(1000);
 		TransitionPageAction.gotoOvertimePage(driver);
 		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
 		DashboardPageObject.popup_CloseDayOff(driver).click();
@@ -1123,7 +1208,6 @@ public class PersonalRequestTest extends CommonTest {
 		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
 		DashboardPageObject.popup_CloseDayOff(driver).click();
 		Thread.sleep(1000);
-		TransitionPageAction.gotoRequestOTPage(driver);
 		TransitionPageAction.gotoRequestOTPage(driver);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.chb_OTGroup(driver)));
 
@@ -1172,8 +1256,17 @@ public class PersonalRequestTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
 
 		// Input request OT
@@ -1196,56 +1289,54 @@ public class PersonalRequestTest extends CommonTest {
 		} else {
 			Assert.fail("Error message does not display");
 		}
-		
-		//Verify user still in current page
-		String title = PersonalRequestsOTPageObject.txt_titleOT(driver).getText();
-		Assert.assertEquals(title, ConstantVariable.OT_title);
-		
+
+		// Verify user still in current page
+		Assert.assertEquals(driver.getTitle(), ConstantVariable.TITLE_TAB_OT);
+
 	}
-	
+
 	// PERSONAL_REQUEST_026
 	@Test
 	public void personal_requestTC026() throws Exception {
-	// Go to Login Page
-			TransitionPageAction.gotoLoginPage(driver);
+		// Go to Login Page
+		TransitionPageAction.gotoLoginPage(driver);
 
-			// Doing Login action with valid User name and password
-			LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+		// Doing Login action with valid User name and password
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
-			// Go to request OT page
-			TransitionPageAction.gotoOvertimePage(driver);
-			TransitionPageAction.gotoRequestOTPage(driver);
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 
-			// Input request OT
-			ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/"
-					+ (LocalDate.now().getMonthValue() - 1);
-			ConstantVariable.REQUEST_OT_DATE = "/" + LocalDate.now().getDayOfMonth();
-			String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 18:00";
-			String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
+		// Go to request OT page
+		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+		TransitionPageAction.gotoRequestOTPage(driver);
 
-			RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
-					ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, "");
+		// Input request OT
+		ConstantVariable.REQUEST_OT_YEAR_MONTH = LocalDate.now().getYear() + "/" + (LocalDate.now().getMonthValue());
+		ConstantVariable.REQUEST_OT_DATE = "/" + LocalDate.now().getDayOfMonth();
+		String requestDateFrom = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 19:00";
+		String requestDateTo = ConstantVariable.REQUEST_OT_YEAR_MONTH + ConstantVariable.REQUEST_OT_DATE + " 21:00";
 
-			// Get message
-			boolean messDisplay = PersonalRequestsOTPageObject.mess_reasonBlank(driver).isDisplayed();
+		RequestOTAction.requestOT(driver, ConstantVariable.BRANCH_VALID, ConstantVariable.GROUP_VALID,
+				ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo, "");
 
-			// Verify Result message
-			if (messDisplay = true) {
-				Assert.assertEquals(PersonalRequestsOTPageObject.mess_reasonBlank(driver).getText(),
-						ConstantVariable.REASON_BLANK_MESS);
-			} else {
-				Assert.fail("Error message does not display");
-			}
-			
-			//Back to OT list page
-			TransitionPageAction.gotoOvertimePage(driver);
-			
-			//Check failed OT form does not displays
-			String expected = "";
-			assertNotEquals(expected, RequestOvertimePageObject.col_Reason(driver).getText());
+		// Back to OT list page
+		driver.navigate().back();
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		// Check failed OT form does not displays
+		String OTList_From = "19:00 " + LocalDate.now().getMonthValue() + "-" + LocalDate.now().getDayOfMonth() + "-"
+				+ +LocalDate.now().getYear();
+		Assert.assertNotSame(RequestOvertimePageObject.col_From(driver).getText(), OTList_From);
 	}
-	
-	//PERSONAL_REQUEST_016/17
+
+	// PERSONAL_REQUEST_016/17
 	@Test
 	public void personal_requestTC016_TC017() throws Exception {
 		// Go to Login Page
@@ -1254,8 +1345,17 @@ public class PersonalRequestTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		// Go to request OT page
 		TransitionPageAction.gotoOvertimePage(driver);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 		TransitionPageAction.gotoRequestOTPage(driver);
 
 		// Input request OT
@@ -1267,7 +1367,6 @@ public class PersonalRequestTest extends CommonTest {
 				ConstantVariable.OT_GROUP_VALID, ConstantVariable.PROJECT_VALID, requestDateFrom, requestDateTo,
 				ConstantVariable.REASON_OT);
 
-		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(PersonalRequestsOTPageObject.mess_requestOTSuccessfully(driver)));
 
 		// Get message
@@ -1276,24 +1375,27 @@ public class PersonalRequestTest extends CommonTest {
 		// Verify Result message successfully
 		Assert.assertEquals(actual_message[actual_message.length - 1],
 				ConstantVariable.CREATE_REQUEST_OT_SUCCESSFULY_MESSAGE);
-		
+
 		// Check data in OT list displays correctly after create OT request
 		// Check Staff code
 		assertEquals(RequestOvertimePageObject.col_EmployeeCode(driver).getText(), ConstantVariable.STAFF_CODE);
 		// Check Staff name
 		assertEquals(RequestOvertimePageObject.col_StaffName(driver).getText(), ConstantVariable.STAFF_NAME);
-		//Check Creation Date
-		String creationDate = LocalDate.now().getYear() + "-" + (LocalDate.now().getMonthValue()) + "-" + LocalDate.now().getDayOfMonth();
+		// Check Creation Date
+		String creationDate = LocalDate.now().getMonthValue() + "-" + LocalDate.now().getDayOfMonth() + "-"
+				+ +LocalDate.now().getYear();
 		assertEquals(RequestOvertimePageObject.col_CreationDay(driver).getText(), creationDate);
 		// Check From
-		String OTList_From = "18:00" + LocalDate.now().getYear() + "-" + (LocalDate.now().getMonthValue()) + "-" + LocalDate.now().getDayOfMonth();
+		String OTList_From = "18:00 " + LocalDate.now().getMonthValue() + "-" + LocalDate.now().getDayOfMonth() + "-"
+				+ +LocalDate.now().getYear();
 		assertEquals(RequestOvertimePageObject.col_From(driver).getText(), OTList_From);
 		// Check To
-		String OTList_To = "21:00" + LocalDate.now().getYear() + "-" + (LocalDate.now().getMonthValue()) + "-" + LocalDate.now().getDayOfMonth();
+		String OTList_To = "21:00 " + LocalDate.now().getMonthValue() + "-" + LocalDate.now().getDayOfMonth() + "-"
+				+ +LocalDate.now().getYear();
 		assertEquals(RequestOvertimePageObject.col_To(driver).getText(), OTList_To);
 		// Check Project
 		assertEquals(RequestOvertimePageObject.col_Project(driver).getText(), ConstantVariable.PROJECT_VALID);
 		// Check Reason
-		assertEquals(RequestOvertimePageObject.col_Reason(driver).getText(), ConstantVariable.REASON_OT);	
+		assertEquals(RequestOvertimePageObject.col_Reason(driver).getText(), ConstantVariable.REASON_OT);
 	}
 }

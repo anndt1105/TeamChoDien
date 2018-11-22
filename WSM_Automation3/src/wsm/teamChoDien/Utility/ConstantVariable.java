@@ -8,11 +8,12 @@ public class ConstantVariable {
 	public static final String USERNAME = "anndt@yopmail.com";
 	public static final String USERNAME_NOT_EXIST = "abc@framgia.com";
 	public static final String USERNAME_INVALID = "nguyen.duc.truong.an";
-	public static final String PASSWORD = "12345678";
+	public static final String PASSWORD = "123456";
 	public static final String INVALID_PASSWORD = "123456";
 	public static final String LOGIN_FAILED_MESSAGE = "Invalid email or password.";
 	public static final String LOGIN_SUCCESSFULY_MESSAGE = "Signed in successfully.";
 	public static final String TAB_TITLE = "Your timesheet | Working space";
+	public static final String TITLE = "Working space";
 	public static final String USERNAME_BLANK_MESSAGE = "Email is required";
 	public static final String PASSWORD_BLANK_MESSAGE = "Password is required";
 	public static final String USERNAME_INVALID_MESSAGE = "Please enter a valid email address";
@@ -42,6 +43,8 @@ public class ConstantVariable {
 	public static final String OLD_PASSWORD = "12345678";
 
 	// PERSONAL REQUEST
+	//Title tab
+	public static String TITLE_TAB_OT = "Request ot form | Working space";
 	// Branch 3=Da Nang Office
 	public static final String BRANCH_VALID = "3";
 
@@ -64,6 +67,7 @@ public class ConstantVariable {
 	public static final String TO_DATE_BLANK_MESS = "End time not be blank";
 	public static final String REASON_BLANK_MESS = "Reason not be blank";
 	public static final String DUPLICATE_REQUEST_MESS = "Request has been taken with other request";
+	public static final String WORKINGTIME_REQUEST_MESS = "Time request ot invalid: it is not in time period request ot.";
 
 	// Message create unsuccessfully
 	public static final String REQUEST_OT_DATE_IN_PAST_MESS = "Timekeeping data of " + REQUEST_OT_DATE

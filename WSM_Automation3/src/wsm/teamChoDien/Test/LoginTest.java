@@ -24,8 +24,11 @@ public class LoginTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
-		// Close popup Day off
-		ClosePopupDayOffAction.closePopup(driver);
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
 
 		// Get message
 		String[] message = DashboardPageObject.mess_loginSuccess(driver).getText().split("\n");
@@ -44,6 +47,12 @@ public class LoginTest extends CommonTest {
 		// Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
+		Thread.sleep(1000);
+
 		Thread.sleep(1000);
 		// Verify title of Tab
 		Assert.assertEquals(driver.getTitle(), ConstantVariable.TAB_TITLE);
@@ -60,7 +69,12 @@ public class LoginTest extends CommonTest {
 		// Step 1+2: Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
 
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
 		Thread.sleep(1000);
+
 		// Step 3: Click Back on browser
 		driver.navigate().back();
 		Thread.sleep(1000);
@@ -79,6 +93,12 @@ public class LoginTest extends CommonTest {
 
 		// Step 1+2: Doing Login action with valid User name and password
 		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.PASSWORD);
+		Thread.sleep(1000);
+
+		// Close popup day of
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.visibilityOf(DashboardPageObject.popup_CloseDayOff(driver)));
+		DashboardPageObject.popup_CloseDayOff(driver).click();
 		Thread.sleep(1000);
 
 		// Step 3+4+5:
@@ -124,13 +144,13 @@ public class LoginTest extends CommonTest {
 
 		// F002 check initial value of remember checkbox
 		Assert.assertFalse(LoginPageObjects.txt_RememberLogin(driver).isSelected(), "Initial remember checkbox failed");
-  
-    // F003 check pass encrypted
+
+		// F003 check pass encrypted
 		String type = LoginPageObjects.txt_Password(driver).getAttribute("type");
 		Assert.assertEquals(type, "password", "password encrypted Failed");
-		
+
 	}
-  
+
 	// LOGIN_010 - Login unsuccessfully with blank Email or Password
 	@Test
 	public void mess_loginWithBlankEmail() throws Exception {
@@ -182,7 +202,7 @@ public class LoginTest extends CommonTest {
 	public void mess_loginWithInvalidPassword() throws Exception {
 		// Go to Login Page
 		TransitionPageAction.gotoLoginPage(driver);
-		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.INVALID_PASSWORD);
+		LoginAction.login(driver, ConstantVariable.USERNAME, ConstantVariable.OLD_PASSWORD);
 
 		// Verify Result
 		WebDriverWait wait = new WebDriverWait(driver, 20);
@@ -209,4 +229,3 @@ public class LoginTest extends CommonTest {
 		Assert.assertEquals(expectedResult, ConstantVariable.USERNAME_INVALID_MESSAGE);
 	}
 }
-

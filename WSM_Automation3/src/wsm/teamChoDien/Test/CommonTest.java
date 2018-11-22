@@ -16,7 +16,7 @@ public class CommonTest {
 	public void beforeTest() {
 		
 		// Using Chrome browser
-		System.setProperty("webdriver.chrome.driver", "D:\\TeamChoDien\\WSM_Automation3\\driver\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "E:\\Thuy\\Auto\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

@@ -16,7 +16,7 @@ public class WelcomePageObjects {
 	
 	// Finding element UI of Log out successfully message
 	public static WebElement mess_logoutsuccessfully(WebDriver driver) {	
-		element = driver.findElement(By.xpath("//div[contains(text(),'Signed out successfully.')]"));
+		element = driver.findElement(By.xpath("//*[@id=\"flash-message\"]"));
 		return element;
 	}
 
