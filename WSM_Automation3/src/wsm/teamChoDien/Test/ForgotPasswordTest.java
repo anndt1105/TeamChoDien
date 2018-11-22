@@ -18,10 +18,9 @@ import wsm.teamChoDien.PageObject.YopMailPageObject;
 import wsm.teamChoDien.Utility.ConstantVariable;
 
 public class ForgotPasswordTest extends CommonTest {
-
 	// FOR_PASS_005
 	@Test
-	public void checkMessageSendMailSuccessfully() throws Exception {
+	public void TC05_checkMessageSendMailSuccessfully() throws Exception {
 
 		// Go to login page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -52,7 +51,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// FOR_PASS_006
 	@Test
-	public void checkMailSent() throws Exception {
+	public void TC06_checkMailSent() throws Exception {
 
 		// Go to login page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -90,7 +89,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// FOR_PASS_007
 	@Test
-	public void gotoChangePasswordScreen() throws Exception {
+	public void TC07_gotoChangePasswordScreen() throws Exception {
 
 		// Go to login page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -118,9 +117,11 @@ public class ForgotPasswordTest extends CommonTest {
 		wait.until(ExpectedConditions.visibilityOf(YopMailPageObject.title_mail(driver)));
 
 		YopMailPageObject.lnk_ChangePassword(driver).click();
+		
 
 		// Verify that Change password screen is displayed
 		SwitchChildWindown.switchChildWindown(driver);
+		driver.navigate().refresh();
 
 		wait.until(ExpectedConditions.visibilityOf(ChangePasswordPageObject.lb_ChangePassword(driver)));
 
@@ -134,7 +135,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// FOR_PASS_008
 	@Test
-	public void loginWithCurrentPassword() throws Exception {
+	public void TC08_loginWithCurrentPassword() throws Exception {
 
 		// Go to login page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -153,13 +154,16 @@ public class ForgotPasswordTest extends CommonTest {
 		// Click OK button
 		ForgotPasswordPageObjects.btn_OK(driver).click();
 
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(
-				"//p[contains(text(),'You will receive an email with instructions on how to reset your password in a few minutes')]")));
+		//wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(
+		//		"//p[contains(text(),'You will receive an email with instructions on how to reset your password in a few minutes')]")));
 
 		// Back to Login form
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		/*JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", ForgotPasswordPageObjects.link_BackToLogin(driver));
-
+		*/
+		driver.navigate().to(ConstantVariable.URL);
+		TransitionPageAction.gotoLoginPage(driver);
+		
 		// Doing Login action with valid User name and password
 		wait.until(ExpectedConditions.visibilityOf(LoginPageObjects.btn_Login(driver)));
 
@@ -177,7 +181,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// FOR_PASS_017
 	@Test
-	public void unsuccessfuly_ConfirmPasswordBlank() throws Exception {
+	public void TC17_unsuccessfuly_ConfirmPasswordBlank() throws Exception {
 
 		// Go to login page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -205,6 +209,7 @@ public class ForgotPasswordTest extends CommonTest {
 		wait.until(ExpectedConditions.visibilityOf(YopMailPageObject.title_mail(driver)));
 
 		YopMailPageObject.lnk_ChangePassword(driver).click();
+		driver.navigate().refresh();
 
 		// Verify that Change password screen is displayed
 		SwitchChildWindown.switchChildWindown(driver);
@@ -225,7 +230,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// FOR_PASS_018
 	@Test
-	public void unsuccessfuly_ConfirmPasswordLess6() throws Exception {
+	public void TC18_unsuccessfuly_ConfirmPasswordLess6() throws Exception {
 
 		// Go to login page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -253,6 +258,7 @@ public class ForgotPasswordTest extends CommonTest {
 		wait.until(ExpectedConditions.visibilityOf(YopMailPageObject.title_mail(driver)));
 
 		YopMailPageObject.lnk_ChangePassword(driver).click();
+		driver.navigate().refresh();
 
 		// Verify that Change password screen is displayed
 		SwitchChildWindown.switchChildWindown(driver);
@@ -276,7 +282,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// FOR_PASS_019
 	@Test
-	public void unsuccessfuly_ConfirmPasswordOver128() throws Exception {
+	public void TC19_unsuccessfuly_ConfirmPasswordOver128() throws Exception {
 
 		// Go to login page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -304,6 +310,7 @@ public class ForgotPasswordTest extends CommonTest {
 		wait.until(ExpectedConditions.visibilityOf(YopMailPageObject.title_mail(driver)));
 
 		YopMailPageObject.lnk_ChangePassword(driver).click();
+		driver.navigate().refresh();
 
 		// Verify that Change password screen is displayed
 		SwitchChildWindown.switchChildWindown(driver);
@@ -327,7 +334,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// FOR_PASS_020
 	@Test
-	public void unsuccessfuly_ConfirmPasswordNotMap() throws Exception {
+	public void TC20_unsuccessfuly_ConfirmPasswordNotMap() throws Exception {
 
 		// Go to login page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -355,6 +362,7 @@ public class ForgotPasswordTest extends CommonTest {
 		wait.until(ExpectedConditions.visibilityOf(YopMailPageObject.title_mail(driver)));
 
 		YopMailPageObject.lnk_ChangePassword(driver).click();
+		driver.navigate().refresh();
 
 		// Verify that Change password screen is displayed
 		SwitchChildWindown.switchChildWindown(driver);
@@ -368,17 +376,16 @@ public class ForgotPasswordTest extends CommonTest {
 		ForgotPasswordPageObjects.txt_ConfirmPassword(driver).sendKeys(ConstantVariable.PASSWORD + "1");
 
 		// Click OK button
-		ForgotPasswordPageObjects.btn_OK(driver).click();
+		ForgotPasswordPageObjects.btn_submitPassword(driver).click();
 
 		// Verify mess is displayed
 		wait.until(ExpectedConditions.visibilityOf(ForgotPasswordPageObjects.mess_PasswordError(driver)));
 		String mess = ForgotPasswordPageObjects.mess_PasswordError(driver).getText();
 		Assert.assertEquals(mess, ConstantVariable.MESSAGE_CONFIRMPASSWORD_NOT_MAP);
 	}
-
 	// FOR_PASS_013 + FOR_PASS_014
 	@Test
-	public void successfuly_ChangePassword() throws Exception {
+	public void TC13_14_successfuly_ChangePassword() throws Exception {
 
 		// Go to login page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -390,18 +397,21 @@ public class ForgotPasswordTest extends CommonTest {
 		wait.until(ExpectedConditions.visibilityOf(ForgotPasswordPageObjects.btn_OK(driver)));
 
 		// Input email
-		ForgotPasswordPageObjects.txt_UserEmail(driver).sendKeys(ConstantVariable.FORGOT_USERNAME);
+		ForgotPasswordPageObjects.txt_UserEmail(driver).sendKeys(ConstantVariable.USERNAME);
 
 		// Click OK button
 		ForgotPasswordPageObjects.btn_OK(driver).click();
+		Thread.sleep(3000);
 
 		// Go to yopmail
 		driver.get(ConstantVariable.YOP_MAIL_URL);
+		Thread.sleep(1000);
 
 		// Click on Change password link
 		driver.switchTo().frame("ifmail");
 		wait.until(ExpectedConditions.visibilityOf(YopMailPageObject.title_mail(driver)));
 		YopMailPageObject.lnk_ChangePassword(driver).click();
+		driver.navigate().refresh();
 
 		// Verify that Change password screen is displayed
 		SwitchChildWindown.switchChildWindown(driver);
@@ -425,10 +435,9 @@ public class ForgotPasswordTest extends CommonTest {
 		// FOR_PASS_014 - Check Working Calendar screen displays
 		Assert.assertEquals(driver.getTitle(), ConstantVariable.TAB_TITLE);
 	}
-
 	// FOR_PASS_015
 	@Test
-	public void loginSuccessWithNewPass() throws Exception {
+	public void TC15_loginSuccessWithNewPass() throws Exception {
 
 		// Go to Login Page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -448,7 +457,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// FOR_PASS_016
 	@Test
-	public void loginFailedWithOldPass() throws Exception {
+	public void TC16_loginFailedWithOldPass() throws Exception {
 
 		// Go to Login Page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -467,7 +476,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// FOR_PASS_001
 	@Test
-	public void checkForgotPasswordLink() throws Exception {
+	public void TC01_checkForgotPasswordLink() throws Exception {
 
 		// Go to login page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -486,7 +495,7 @@ public class ForgotPasswordTest extends CommonTest {
 	// FOR_PASS_002
 	// Title
 	@Test
-	public void checkForgotPasswordTitle() throws Exception {
+	public void TC02_checkForgotPasswordTitle() throws Exception {
 
 		// Go to login page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -505,7 +514,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// Mail textbox
 	@Test
-	public void checkMailTextbox() throws Exception {
+	public void TC02_checkMailTextbox() throws Exception {
 
 		// Go to login page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -523,7 +532,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// OK button
 	@Test
-	public void checkOKButtonOfForgotPassScr() throws Exception {
+	public void TC02_checkOKButtonOfForgotPassScr() throws Exception {
 
 		// Go to login page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -541,7 +550,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// Cancel Button
 	@Test
-	public void checkCancelButton() throws Exception {
+	public void TC02_checkCancelButton() throws Exception {
 
 		// Go to login page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -559,7 +568,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// Back to login link
 	@Test
-	public void checkBackToLoginLink() throws Exception {
+	public void TC02_checkBackToLoginLink() throws Exception {
 
 		// Go to login page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -577,7 +586,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// FOR_PASS_004
 	@Test
-	public void checkClickBackToLoginLink() throws Exception {
+	public void TC04_checkClickBackToLoginLink() throws Exception {
 
 		// Go to login page
 		TransitionPageAction.gotoLoginPage(driver);
@@ -599,7 +608,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// FOR_PASS 009
 	@Test
-	public void requestUnsuccessfullBlankEmail() throws Exception {
+	public void TC09_requestUnsuccessfullBlankEmail() throws Exception {
 
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 
@@ -621,7 +630,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// FOR_PASS 010
 	@Test
-	public void requestUnsuccessfullValidEmail() throws Exception {
+	public void TC10_requestUnsuccessfullValidEmail() throws Exception {
 
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 
@@ -644,7 +653,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// FOR_PASS 011
 	@Test
-	public void requestUnsuccessfullEmailNotExist() throws Exception {
+	public void TC11_requestUnsuccessfullEmailNotExist() throws Exception {
 
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 
@@ -668,7 +677,7 @@ public class ForgotPasswordTest extends CommonTest {
 	// FOR_PASS_012 - Check Component Change Password Screen
 	// Check Title
 	@Test
-	public void checkTitleChangePassword() throws Exception {
+	public void TC12_checkTitleChangePassword() throws Exception {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 
 		// go to Change Password page
@@ -683,7 +692,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// Check Label New Password
 	@Test
-	public void checkLabelNewPassword() throws Exception {
+	public void TC12_checkLabelNewPassword() throws Exception {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 
 		// go to Change Password page
@@ -698,7 +707,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// Check New password textbox
 	@Test
-	public void checkNewPasswordTextbox() throws Exception {
+	public void TC12_checkNewPasswordTextbox() throws Exception {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 
 		// go to Change Password page
@@ -712,7 +721,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// Check Confirm new password label
 	@Test
-	public void checkLabelConfirmNewPassword() throws Exception {
+	public void TC12_checkLabelConfirmNewPassword() throws Exception {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 
 		// go to Change Password page
@@ -727,7 +736,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// check Confirm New password textbox
 	@Test
-	public void checkConfirmNewPasswordTextbox() throws Exception {
+	public void TC12_checkConfirmNewPasswordTextbox() throws Exception {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 
 		// go to Change Password page
@@ -741,7 +750,7 @@ public class ForgotPasswordTest extends CommonTest {
 
 	// check OK button of Change Password screen
 	@Test
-	public void checkOKButtonOfChangePassScr() throws Exception {
+	public void TC12_checkOKButtonOfChangePassScr() throws Exception {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 
 		// go to Change Password page
@@ -752,5 +761,4 @@ public class ForgotPasswordTest extends CommonTest {
 		// check OK button
 		Assert.assertTrue((ChangePasswordPageObject.btn_OK(driver).isDisplayed()));
 	}
-
 }
